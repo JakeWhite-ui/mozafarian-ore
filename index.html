@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mozafarian — Fine Jewellers Since 1821 · Dubai &amp; London</title>
+<meta name="description" content="Mozafarian. Seven generations of fine jewellery. Bespoke diamonds, rare gemstones and 18-karat gold. Dubai &amp; London.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./css/styles.css">
+
+</head>
+<body>
+
+  <!-- ============ PRELOADER ============ -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <span class="preloader__brand">MOZAFARIAN</span>
+      <span class="preloader__count" id="preloadCount">0</span>
+    </div>
+  </div>
+
+  <!-- ============ CURSOR LABEL (drag hint) ============ -->
+  <div class="cursor-label" id="cursorLabel">DRAG</div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <a href="#hero" class="header__logo" data-scroll-to>MOZAFARIAN</a>
+    <div class="header__right">
+      <span class="header__code" id="headerCode">1.821</span>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="menuOverlay">MENU</button>
+    </div>
+  </header>
+
+  <!-- ============ FULLSCREEN MENU ============ -->
+  <nav class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <ul class="menu-overlay__list">
+      <li><a href="#hero" data-scroll-to data-menu-link>Home</a></li>
+      <li><a href="#collections" data-scroll-to data-menu-link>Collections</a></li>
+      <li><a href="#featured" data-scroll-to data-menu-link>Best Seller</a></li>
+      <li><a href="#maison" data-scroll-to data-menu-link>The Maison</a></li>
+      <li><a href="#contact" data-scroll-to data-menu-link>Boutiques</a></li>
+    </ul>
+    <div class="menu-overlay__meta">
+      <span>Wafi City, Dubai</span>
+      <span>Knightsbridge, London</span>
+    </div>
+  </nav>
+
+  <main id="smooth-content">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero scene" id="hero">
+      <div class="hero__media" data-media="hero-video">
+        <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="./assets/hero-poster.jpg">
+          <source src="./assets/hero.webm" type="video/webm">
+          <source src="./assets/hero.mp4" type="video/mp4">
+        </video>
+        <span class="media-placeholder">HERO VIDEO · assets/hero.mp4</span>
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <span class="hero__eyebrow reveal-fade">Fine Jewellers Since 1821</span>
+        <h1 class="hero__title">
+          <span class="line"><span>Seven generations</span></span>
+          <span class="line"><span>of fine <em>jewellery.</em></span></span>
+        </h1>
+        <p class="hero__sub reveal-fade">From Neuch&acirc;tel to Persia to Dubai — a family house crafting diamonds, rare gemstones and 18-karat gold into pieces made to be worn for a lifetime.</p>
+        <div class="hero__actions reveal-fade">
+          <a href="#collections" class="btn btn--filled" data-scroll-to>Explore the Collections</a>
+          <a href="#contact" class="btn btn--ghost" data-scroll-to>Book a Private Viewing</a>
+        </div>
+      </div>
+      <div class="hero__scroll reveal-fade">
+        <span>Scroll</span><i></i>
+      </div>
+    </section>
+
+    <!-- ============ HERITAGE ============ -->
+    <section class="heritage scene" id="heritage">
+      <div class="heritage__bg" data-media="heritage-1">
+        <img class="media-img" src="./assets/heritage-1.webp" alt="" loading="lazy" onerror="this.remove()">
+      </div>
+      <h2 class="giant-word" data-parallax="-12">HERITAGE</h2>
+      <div class="heritage__row">
+        <div class="heritage__stat">
+          <span class="heritage__num" data-count="1821">1821</span>
+          <span class="heritage__label">The house is founded</span>
+        </div>
+        <div class="heritage__stat">
+          <span class="heritage__num" data-count="7">7</span>
+          <span class="heritage__label">Generations of the family</span>
+        </div>
+        <div class="heritage__stat">
+          <span class="heritage__num" data-count="2">2</span>
+          <span class="heritage__label">Houses — Dubai &amp; London</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COLLECTIONS (drag carousel) ============ -->
+    <section class="collections scene" id="collections">
+      <h2 class="giant-word giant-word--top" data-parallax="14">COLLECTIONS</h2>
+
+      <div class="collections__head">
+        <span class="eyebrow">The Collections</span>
+        <p class="collections__hint">Drag to explore</p>
+        <span class="collections__counter" id="carouselCounter">01 / 06</span>
+      </div>
+
+      <div class="carousel" id="carousel">
+        <div class="carousel__track" id="carouselTrack">
+          <article class="c-item" data-index="0">
+            <div class="c-item__media" data-media="collections/01">
+              <video class="c-item__video" muted loop playsinline preload="metadata" poster="./assets/collections/01-poster.jpg">
+                <source src="./assets/collections/01.webm" type="video/webm">
+                <source src="./assets/collections/01.mp4" type="video/mp4">
+              </video>
+              <span class="media-placeholder">01 · Eclipse</span>
+            </div>
+            <div class="c-item__foot">
+              <h3>Eclipse</h3><p>Light and shadow, drawn in diamond</p>
+            </div>
+          </article>
+          <article class="c-item" data-index="1">
+            <div class="c-item__media" data-media="collections/02">
+              <video class="c-item__video" muted loop playsinline preload="metadata" poster="./assets/collections/02-poster.jpg">
+                <source src="./assets/collections/02.webm" type="video/webm">
+                <source src="./assets/collections/02.mp4" type="video/mp4">
+              </video>
+              <span class="media-placeholder">02 · DolceVita</span>
+            </div>
+            <div class="c-item__foot">
+              <h3>DolceVita</h3><p>Warm gold, worn every day</p>
+            </div>
+          </article>
+          <article class="c-item" data-index="3">
+            <div class="c-item__media" data-media="collections/04">
+              <video class="c-item__video" muted loop playsinline preload="metadata" poster="./assets/collections/04-poster.jpg">
+                <source src="./assets/collections/04.webm" type="video/webm">
+                <source src="./assets/collections/04.mp4" type="video/mp4">
+              </video>
+              <span class="media-placeholder">04 · Arabesque</span>
+            </div>
+            <div class="c-item__foot">
+              <h3>Arabesque</h3><p>The line of the region, reimagined</p>
+            </div>
+          </article>
+          <article class="c-item" data-index="4">
+            <div class="c-item__media" data-media="collections/05">
+              <video class="c-item__video" muted loop playsinline preload="metadata" poster="./assets/collections/05-poster.jpg">
+                <source src="./assets/collections/05.webm" type="video/webm">
+                <source src="./assets/collections/05.mp4" type="video/mp4">
+              </video>
+              <span class="media-placeholder">05 · Talisman</span>
+            </div>
+            <div class="c-item__foot">
+              <h3>Talisman</h3><p>Pieces carried close, for meaning</p>
+            </div>
+          </article>
+          <article class="c-item" data-index="5">
+            <div class="c-item__media" data-media="collections/06">
+              <video class="c-item__video" muted loop playsinline preload="metadata" poster="./assets/collections/06-poster.jpg">
+                <source src="./assets/collections/06.webm" type="video/webm">
+                <source src="./assets/collections/06.mp4" type="video/mp4">
+              </video>
+              <span class="media-placeholder">06 · Scintilla</span>
+            </div>
+            <div class="c-item__foot">
+              <h3>Scintilla</h3><p>High jewellery, without compromise</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED ============ -->
+    <section class="featured scene" id="featured">
+      <div class="featured__bg">
+        <video class="media-vid" autoplay muted loop playsinline preload="metadata" poster="./assets/featured-poster.jpg">
+          <source src="./assets/featured.webm" type="video/webm">
+          <source src="./assets/featured.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="featured__scrim"></div>
+      <div class="section__inner featured__content">
+        <span class="eyebrow">Best Seller</span>
+        <h2 class="featured__title reveal-lines">
+          <span class="line"><span>Art Deco Diamond</span></span>
+          <span class="line"><span>&amp; Sapphire Ring</span></span>
+        </h2>
+        <p class="featured__name reveal-fade">18K White Gold · Diamond &amp; Sapphire Square Cluster</p>
+        <div class="featured__specs reveal-fade">
+          <div><span class="k">Metal</span><span class="v">18K White Gold</span></div>
+          <div><span class="k">Stones</span><span class="v">Diamond · Sapphire</span></div>
+          <div><span class="k">Availability</span><span class="v v--gold">On request</span></div>
+        </div>
+        <a href="#contact" class="btn btn--filled reveal-fade" data-scroll-to>Enquire About This Piece</a>
+      </div>
+    </section>
+
+    <!-- ============ MAISON ============ -->
+    <section class="maison scene" id="maison">
+      <div class="maison__inner">
+        <span class="eyebrow">The Maison</span>
+        <p class="maison__text reveal-lines">
+          <span class="line"><span>In 1821, the family left Neuch&acirc;tel for Persia</span></span>
+          <span class="line"><span>under royal patronage. A marriage gave the</span></span>
+          <span class="line"><span>house its name — <em>Mozafarian</em>, “the victorious.”</span></span>
+          <span class="line"><span>Seven generations on, we serve the world</span></span>
+          <span class="line"><span>from two homes: Dubai and London.</span></span>
+        </p>
+        <span class="maison__sign">— The Mozafarian family</span>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT / BESPOKE CTA ============ -->
+    <section class="contact scene" id="contact">
+      <div class="contact__media" data-media="bespoke">
+        <img class="media-img" src="./assets/bespoke.webp" alt="Bespoke atelier" loading="lazy" onerror="this.remove()">
+        <span class="media-placeholder">BESPOKE · assets/bespoke.webp</span>
+      </div>
+      <div class="contact__overlay"></div>
+      <div class="contact__content">
+        <span class="eyebrow">Bespoke</span>
+        <h2 class="contact__title reveal-lines">
+          <span class="line"><span>Let us tell</span></span>
+          <span class="line"><span>your <em>story.</em></span></span>
+        </h2>
+        <a href="mailto:info@mozafarian.ae" class="btn btn--filled btn--lg reveal-fade">Book a private viewing</a>
+
+        <div class="contact__boutiques">
+          <div class="boutique">
+            <h3>Dubai</h3>
+            <p>Sofitel Obelisk, Wafi City, Dubai — UAE</p>
+            <a href="tel:+971561394378">+971 56 13 94 378</a>
+          </div>
+          <div class="boutique">
+            <h3>London</h3>
+            <p>1 Knightsbridge Green, London SW1X 7NE</p>
+            <a href="tel:+971561394378">+971 56 13 94 378</a>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <span>MOZAFARIAN</span>
+        <span>&copy; 2026 Mozafarian Jewellers — Dubai &amp; London</span>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
