@@ -11,13 +11,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="./css/styles.css">
+<link rel="stylesheet" href="./css/catalog.css">
 
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/icon-32.png">
+<link rel="apple-touch-icon" href="./assets/brand/icon-180.png">
 </head>
 <body>
 
   <!-- ============ PRELOADER ============ -->
   <div class="preloader" id="preloader">
     <div class="preloader__inner">
+      <span class="crown crown--preloader"></span>
       <span class="preloader__brand">MOZAFARIAN</span>
       <span class="preloader__count" id="preloadCount">0</span>
     </div>
@@ -28,7 +32,7 @@
 
   <!-- ============ HEADER ============ -->
   <header class="header" id="header">
-    <a href="#hero" class="header__logo" data-scroll-to>MOZAFARIAN</a>
+    <a href="#hero" class="header__logo header__logo--mark" data-scroll-to><span class="crown"></span><span>MOZAFARIAN</span></a>
     <div class="header__right">
       <span class="header__code" id="headerCode">1.821</span>
       <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="menuOverlay">MENU</button>
@@ -39,9 +43,13 @@
   <nav class="menu-overlay" id="menuOverlay" aria-hidden="true">
     <ul class="menu-overlay__list">
       <li><a href="#hero" data-scroll-to data-menu-link>Home</a></li>
-      <li><a href="#collections" data-scroll-to data-menu-link>Collections</a></li>
-      <li><a href="#featured" data-scroll-to data-menu-link>Best Seller</a></li>
-      <li><a href="#maison" data-scroll-to data-menu-link>The Maison</a></li>
+      <li><a href="./high-jewellery.html" data-menu-link>High Jewellery</a></li>
+      <li><a href="./jewellery.html" data-menu-link>Jewellery</a></li>
+      <li><a href="./for-her.html" data-menu-link>For Her</a></li>
+      <li><a href="./for-him.html" data-menu-link>For Him</a></li>
+      <li><a href="./bridal.html" data-menu-link>Engagement &amp; Bridal</a></li>
+      <li><a href="./watches.html" data-menu-link>Watches</a></li>
+      <li><a href="./house.html" data-menu-link>The House</a></li>
       <li><a href="#contact" data-scroll-to data-menu-link>Boutiques</a></li>
     </ul>
     <div class="menu-overlay__meta">
