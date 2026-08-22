@@ -108,10 +108,32 @@
       return true;
     }
 
-    var state = { all: [], filtered: [], shown: 0, cat: paramOf('category') || 'All' };
+    var state = { all: [], filtered: [], shown: 0, cat: paramOf('category') || 'All', curated: true };
+
+    function hasImg(p) { return p.images && p.images.length; }
 
     loadProducts().then(function (data) {
-      state.all = data.filter(inGender);
+      var scope = data.filter(inGender);
+      var shot = scope.filter(hasImg);
+      // curated view: only pieces we have photographed. Falls back to the full
+      // list when nothing in this scope is shot yet, so a page is never empty.
+      state.curated = paramOf('all') !== '1' && shot.length > 0;
+      state.all = state.curated ? shot : scope;
+      state.scopeTotal = scope.length;
+
+      // A lookbook page with nothing photographed in this scope: show the
+      // lookbook alone rather than a wall of empty cards.
+      if (!shot.length && document.querySelector('.lookbook') && paramOf('all') !== '1') {
+        filterBar.style.display = 'none';
+        grid.style.display = 'none';
+        moreWrap.innerHTML =
+          '<div class="cat-archive">The full collection runs to <strong>' + scope.length +
+          ' pieces</strong>, catalogued and held in the boutique while photography is completed. ' +
+          '<a href="?all=1">Browse the full collection</a> or ' +
+          '<a href="mailto:info@mozafarian.ae?subject=Mozafarian%20%E2%80%94%20collection%20enquiry">ask us about a piece</a>.</div>';
+        return;
+      }
+
       buildFilters(state.all);
       applyFilter(state.cat);
     }).catch(function (err) {
@@ -173,6 +195,21 @@
         btn.addEventListener('click', renderMore);
         moreWrap.appendChild(btn);
       }
+      renderArchiveNote();
+    }
+
+    // The rest of the collection is in the boutique but not yet photographed —
+    // say so plainly instead of padding the grid with empty cards.
+    function renderArchiveNote() {
+      if (!state.curated || state.shown < state.filtered.length) return;
+      var rest = state.scopeTotal - state.all.length;
+      if (rest <= 0) return;
+      var note = document.createElement('div');
+      note.className = 'cat-archive';
+      note.innerHTML = 'A further <strong>' + rest + ' pieces</strong> are held in the boutique and are being photographed. ' +
+        '<a href="?all=1">View the full catalogue</a> or ' +
+        '<a href="mailto:info@mozafarian.ae?subject=Mozafarian%20%E2%80%94%20catalogue%20enquiry">enquire about a specific piece</a>.';
+      moreWrap.appendChild(note);
     }
 
     function pushUrl(cat) {
