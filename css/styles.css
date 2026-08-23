@@ -275,6 +275,9 @@ button { font-family: inherit; color: inherit; background: none; border: none; c
 .boutique h3 { font-size: 1.6rem; color: var(--ink); margin-bottom: 10px; }
 .boutique p { font-size: 0.9rem; color: var(--muted); max-width: 28ch; margin: 0 auto 8px; }
 .boutique a { font-size: 0.9rem; color: var(--powder); }
+.boutique__wa { display: block; margin-top: 6px; border-bottom: 1px solid rgba(216,178,178,0.35); width: fit-content; margin-inline: auto; }
+.boutique__wa:hover { border-bottom-color: var(--powder); }
+.contact__actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
 
 .footer {
   position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;

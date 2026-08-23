@@ -44,11 +44,8 @@
   function priceLabel() { return 'Price on request'; }
 
   function enquireHref(p) {
-    var subject = 'Enquiry — ' + p.title;
-    var body = 'Hello Mozafarian,%0D%0A%0D%0AI would like to enquire about "' + p.title +
-      '" (' + p.category + ').%0D%0A%0D%0AReference: ' + location.origin + '/product.html?handle=' + p.handle +
-      '%0D%0A%0D%0AThank you.';
-    return 'mailto:' + MAILTO + '?subject=' + encodeURIComponent(subject) + '&body=' + body;
+    return waLink('I would like to enquire about "' + p.title + '" (' + p.category + '). ' +
+      location.origin + location.pathname.replace(/[^/]*$/, '') + 'product.html?handle=' + p.handle);
   }
 
   /* ---------- card ---------- */
@@ -144,7 +141,7 @@
           '<div class="cat-archive">The full collection runs to <strong>' + scope.length +
           ' pieces</strong>, catalogued and held in the boutique while photography is completed. ' +
           '<a href="' + showAllHref() + '">Browse the full collection</a> or ' +
-          '<a href="mailto:info@mozafarian.ae?subject=Mozafarian%20%E2%80%94%20collection%20enquiry">ask us about a piece</a>.</div>';
+          '<a target="_blank" rel="noopener" href="' + waLink('I would like to ask about a piece from the collection.') + '">ask us about a piece</a>.</div>';
         return;
       }
 
@@ -236,7 +233,7 @@
       note.className = 'cat-archive';
       note.innerHTML = 'A further <strong>' + rest + ' pieces</strong> are held in the boutique and are being photographed. ' +
         '<a href="' + showAllHref() + '">View the full catalogue</a> or ' +
-        '<a href="mailto:info@mozafarian.ae?subject=Mozafarian%20%E2%80%94%20catalogue%20enquiry">enquire about a specific piece</a>.';
+        '<a target="_blank" rel="noopener" href="' + waLink('I would like to enquire about a piece that is not yet shown on the site.') + '">enquire about a specific piece</a>.';
       moreWrap.appendChild(note);
     }
 
@@ -286,8 +283,8 @@
             '<div><span class="k">Availability</span><span class="v v--gold">On request</span></div>' +
           '</div>' +
           '<div class="pdp__actions">' +
-            '<a class="btn btn--filled" href="' + enquireHref(p) + '">Enquire about this piece</a>' +
-            '<a class="btn btn--ghost" href="mailto:' + MAILTO + '?subject=' + encodeURIComponent('Private viewing — ' + p.title) + '">Book a private viewing</a>' +
+            '<a class="btn btn--filled" target="_blank" rel="noopener" href="' + enquireHref(p) + '">Enquire on WhatsApp</a>' +
+            '<a class="btn btn--ghost" href="mailto:' + MAILTO + '?subject=' + encodeURIComponent('Private viewing — ' + p.title) + '">Write to us</a>' +
           '</div>' +
           '<p class="pdp__note">Each Mozafarian piece is offered on request. Our team will share pricing, certification and availability, and can arrange a private viewing at our Dubai or London boutique.</p>' +
         '</div>';
@@ -387,14 +384,13 @@
 
       var ref = (img.getAttribute('src') || '').split('/').pop().replace(/\.[a-z]+$/i, '');
       var piece = img.getAttribute('alt') || 'a piece';
-      var subject = 'Mozafarian — ' + scope + ' enquiry (' + ref + ')';
-      var body = 'I would like to know more about the ' + piece.toLowerCase() +
-        ' shown in the ' + scope + ' lookbook (reference ' + ref + ').';
 
       var a = document.createElement('a');
       a.className = 'lookbook__link';
-      a.href = 'mailto:info@mozafarian.ae?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
+      a.href = waLink('I would like to know more about the ' + piece.toLowerCase() +
+        ' shown in the ' + scope + ' lookbook (reference ' + ref + ').');
+      a.target = '_blank';
+      a.rel = 'noopener';
       a.setAttribute('aria-label', 'Enquire about ' + piece);
 
       fig.insertBefore(a, img);
@@ -408,6 +404,14 @@
   }
 
   /* ---------- utils ---------- */
+  var WHATSAPP = '971561394378';
+  // Enquiries go to WhatsApp with the message already written: in this market
+  // it is how a client reaches a jeweller, and a mailto asks them to leave the
+  // phone to open a mail client they may not have set up.
+  function waLink(message) {
+    return 'https://wa.me/' + WHATSAPP + '?text=' +
+      encodeURIComponent('Hello Mozafarian. ' + message);
+  }
   function paramOf(k) { return new URLSearchParams(location.search).get(k); }
   function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
   function escapeAttr(s) { return escapeHtml(s); }
