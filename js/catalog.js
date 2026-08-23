@@ -370,6 +370,43 @@
     }
   }
 
+  /* ---------- lookbook ---------- */
+  // The lookbook was a wall of photographs with nothing to click: someone who
+  // fell for a piece had no way to ask about it. Each frame becomes its own
+  // enquiry, quoting the shot reference so the boutique knows which piece is
+  // meant — these are editorial shots, not catalogue entries, so the reference
+  // is the only reliable handle on them.
+  function initLookbook() {
+    var items = document.querySelectorAll('.lookbook__item');
+    if (!items.length) return;
+    var scope = document.body.getAttribute('data-gender') === 'him' ? 'For Him' : 'For Her';
+
+    Array.prototype.forEach.call(items, function (fig) {
+      var img = fig.querySelector('img');
+      if (!img || fig.querySelector('a')) return;
+
+      var ref = (img.getAttribute('src') || '').split('/').pop().replace(/\.[a-z]+$/i, '');
+      var piece = img.getAttribute('alt') || 'a piece';
+      var subject = 'Mozafarian — ' + scope + ' enquiry (' + ref + ')';
+      var body = 'I would like to know more about the ' + piece.toLowerCase() +
+        ' shown in the ' + scope + ' lookbook (reference ' + ref + ').';
+
+      var a = document.createElement('a');
+      a.className = 'lookbook__link';
+      a.href = 'mailto:info@mozafarian.ae?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(body);
+      a.setAttribute('aria-label', 'Enquire about ' + piece);
+
+      fig.insertBefore(a, img);
+      a.appendChild(img);
+
+      var cap = document.createElement('span');
+      cap.className = 'lookbook__cta';
+      cap.textContent = 'Enquire';
+      a.appendChild(cap);
+    });
+  }
+
   /* ---------- utils ---------- */
   function paramOf(k) { return new URLSearchParams(location.search).get(k); }
   function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
@@ -379,6 +416,7 @@
   /* ---------- boot ---------- */
   document.addEventListener('DOMContentLoaded', function () {
     initMenu();
+    initLookbook();
     initShop();
     initProduct();
     initHub();

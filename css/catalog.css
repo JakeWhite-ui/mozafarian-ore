@@ -79,6 +79,18 @@
   transition: transform 1.1s var(--ease); transform: scale(1.01);
 }
 .lookbook__item:hover img { transform: scale(1.06); }
+.lookbook__link { display: block; width: 100%; height: 100%; position: relative; }
+.lookbook__cta {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 34px 16px 16px; text-align: center;
+  font-size: 0.68rem; letter-spacing: var(--track-label); text-transform: uppercase;
+  color: #fff; background: linear-gradient(180deg, transparent, rgba(10,10,10,0.78));
+  opacity: 0; transition: opacity .4s var(--ease);
+}
+.lookbook__link:hover .lookbook__cta,
+.lookbook__link:focus-visible .lookbook__cta { opacity: 1; }
+/* Touch has no hover to reveal it, so the label just stays visible. */
+@media (hover: none) { .lookbook__cta { opacity: 1; } }
 @media (max-width: 900px) { .lookbook__grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 600px) { .lookbook__grid { grid-template-columns: repeat(2, 1fr); } }
 
