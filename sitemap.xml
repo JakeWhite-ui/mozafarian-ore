@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- product.html is intentionally absent: it is a single template driven by
+     ?handle=, so listing it would submit one URL standing in for 585 pieces. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://jakewhite-ui.github.io/mozafarian-ore/</loc><priority>1.0</priority></url>
+  <url><loc>https://jakewhite-ui.github.io/mozafarian-ore/high-jewellery.html</loc><priority>0.9</priority></url>
+  <url><loc>https://jakewhite-ui.github.io/mozafarian-ore/jewellery.html</loc><priority>0.9</priority></url>
+  <url><loc>https://jakewhite-ui.github.io/mozafarian-ore/bridal.html</loc><priority>0.9</priority></url>
+  <url><loc>https://jakewhite-ui.github.io/mozafarian-ore/watches.html</loc><priority>0.9</priority></url>
+  <url><loc>https://jakewhite-ui.github.io/mozafarian-ore/shop.html</loc><priority>0.8</priority></url>
+  <url><loc>https://jakewhite-ui.github.io/mozafarian-ore/for-her.html</loc><priority>0.8</priority></url>
+  <url><loc>https://jakewhite-ui.github.io/mozafarian-ore/for-him.html</loc><priority>0.8</priority></url>
+  <url><loc>https://jakewhite-ui.github.io/mozafarian-ore/house.html</loc><priority>0.7</priority></url>
+</urlset>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jakewhite-ui.github.io/mozafarian-ore/sitemap.xml
