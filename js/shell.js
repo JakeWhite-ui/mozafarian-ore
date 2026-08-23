@@ -16,7 +16,8 @@
     { key: 'jewellery', label: 'Jewellery',        href: './jewellery.html' },
     { key: 'bridal',  label: 'Engagement & Bridal', href: './bridal.html' },
     { key: 'watches', label: 'Watches',            href: './watches.html' },
-    { key: 'house',   label: 'The House',          href: './house.html' }
+    { key: 'house',   label: 'The House',          href: './house.html' },
+    { key: 'boutiques', label: 'Boutiques',        href: './boutiques.html' }
   ];
 
   // collections split (For Her / For Him)
@@ -125,9 +126,10 @@
         '<div class="site-footer__col">' +
           '<span class="eyebrow">Boutiques</span>' +
           '<ul>' +
-            '<li>Sofitel Obelisk, Wafi City, Dubai</li>' +
-            '<li>1 Knightsbridge Green, London</li>' +
+            '<li><a href="./boutiques.html">Sofitel Obelisk, Wafi City, Dubai</a></li>' +
+            '<li><a href="./boutiques.html">1 Knightsbridge Green, London</a></li>' +
             '<li><a href="tel:+971561394378">+971 56 13 94 378</a></li>' +
+            '<li><a target="_blank" rel="noopener" href="https://wa.me/971561394378?text=Hello%20Mozafarian.%20I%20would%20like%20to%20arrange%20a%20viewing.">WhatsApp</a></li>' +
           '</ul>' +
         '</div>' +
       '</div>' +
