@@ -178,7 +178,10 @@ button { font-family: inherit; color: inherit; background: none; border: none; c
 .hero__video { width: 100%; height: 100%; object-fit: cover; }
 .hero__overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(180deg, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.15) 45%, rgba(10,10,10,0.92) 100%);
+  /* The client's own footage is far brighter than the placeholder film it
+     replaced, so the ramp starts earlier — the eyebrow sits around 55% and was
+     washing out against the white presentation box. */
+  background: linear-gradient(180deg, rgba(10,10,10,0.38) 0%, rgba(10,10,10,0.16) 32%, rgba(10,10,10,0.58) 62%, rgba(10,10,10,0.94) 100%);
 }
 .hero__content { position: relative; z-index: 2; max-width: 62ch; }
 .hero__eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 500; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--powder); margin-bottom: 22px; }
@@ -289,6 +292,13 @@ button { font-family: inherit; color: inherit; background: none; border: none; c
   .heritage__stat:first-child { border-top: none; padding-top: 0; }
   .header { mix-blend-mode: normal; }
   .collections__counter { display: none; }
+}
+
+@media (max-width: 620px) {
+  /* At 375px the wordmark ran straight into the year with no gap. The year is
+     decorative — the crest and MENU are what the header has to carry. */
+  .header__code { display: none; }
+  .header__logo { font-size: 1.1rem; letter-spacing: 0.12em; }
 }
 
 /* ============ REDUCED MOTION ============ */

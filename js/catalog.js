@@ -108,38 +108,54 @@
       return true;
     }
 
-    var state = { all: [], filtered: [], shown: 0, cat: paramOf('category') || 'All', curated: true };
+    var state = { scope: [], filtered: [], shown: 0, cat: paramOf('category') || 'All', curated: true };
 
     function hasImg(p) { return p.images && p.images.length; }
 
+    // Curation is decided per category, not once for the whole catalogue.
+    // Deciding it globally meant one photographed category (Watches) put every
+    // other category on a curated list it had no pieces in — /shop?category=Rings
+    // rendered an empty grid while the hub advertised 184 rings.
+    function inCat(cat) {
+      return cat === 'All' ? state.scope.slice()
+        : state.scope.filter(function (p) { return p.category === cat; });
+    }
+
+    // What a category actually shows: its photographed pieces if it has any,
+    // otherwise the full list as awaiting-photography cards. Never empty.
+    function viewOf(cat) {
+      var all = inCat(cat);
+      var shot = all.filter(hasImg);
+      var curated = state.showAll ? false : shot.length > 0;
+      return { list: curated ? shot : all, total: all.length, curated: curated };
+    }
+
     loadProducts().then(function (data) {
       var scope = data.filter(inGender);
-      var shot = scope.filter(hasImg);
-      // curated view: only pieces we have photographed. Falls back to the full
-      // list when nothing in this scope is shot yet, so a page is never empty.
-      state.curated = paramOf('all') !== '1' && shot.length > 0;
-      state.all = state.curated ? shot : scope;
-      state.scopeTotal = scope.length;
+      state.scope = scope;
+      state.showAll = paramOf('all') === '1';
 
       // A lookbook page with nothing photographed in this scope: show the
       // lookbook alone rather than a wall of empty cards.
-      if (!shot.length && document.querySelector('.lookbook') && paramOf('all') !== '1') {
+      if (!scope.some(hasImg) && document.querySelector('.lookbook') && !state.showAll) {
         filterBar.style.display = 'none';
         grid.style.display = 'none';
         moreWrap.innerHTML =
           '<div class="cat-archive">The full collection runs to <strong>' + scope.length +
           ' pieces</strong>, catalogued and held in the boutique while photography is completed. ' +
-          '<a href="?all=1">Browse the full collection</a> or ' +
+          '<a href="' + showAllHref() + '">Browse the full collection</a> or ' +
           '<a href="mailto:info@mozafarian.ae?subject=Mozafarian%20%E2%80%94%20collection%20enquiry">ask us about a piece</a>.</div>';
         return;
       }
 
-      buildFilters(state.all);
+      buildFilters(scope);
       applyFilter(state.cat);
     }).catch(function (err) {
       grid.innerHTML = '<div class="cat-empty">Catalogue unavailable. ' + escapeHtml(String(err.message)) + '</div>';
     });
 
+    // Built from the whole scope so every category the menu and the hub link to
+    // is reachable here, photographed or not.
     function buildFilters(data) {
       var counts = {};
       data.forEach(function (p) { counts[p.category] = (counts[p.category] || 0) + 1; });
@@ -167,7 +183,10 @@
 
     function applyFilter(cat) {
       state.cat = cat;
-      state.filtered = (cat === 'All') ? state.all.slice() : state.all.filter(function (p) { return p.category === cat; });
+      var view = viewOf(cat);
+      state.filtered = view.list;
+      state.curated = view.curated;
+      state.catTotal = view.total;
       // photographed pieces lead the grid; awaiting-photography follow
       state.filtered.sort(function (a, b) {
         return (b.images && b.images.length ? 1 : 0) - (a.images && a.images.length ? 1 : 0);
@@ -198,16 +217,25 @@
       renderArchiveNote();
     }
 
+    // Keeps the category the visitor is standing in when they ask to see
+    // everything, rather than dropping them back into the whole catalogue.
+    function showAllHref() {
+      var q = new URLSearchParams(location.search);
+      q.set('all', '1');
+      if (state.cat === 'All') q.delete('category'); else q.set('category', state.cat);
+      return '?' + q.toString();
+    }
+
     // The rest of the collection is in the boutique but not yet photographed —
     // say so plainly instead of padding the grid with empty cards.
     function renderArchiveNote() {
       if (!state.curated || state.shown < state.filtered.length) return;
-      var rest = state.scopeTotal - state.all.length;
+      var rest = state.catTotal - state.filtered.length;
       if (rest <= 0) return;
       var note = document.createElement('div');
       note.className = 'cat-archive';
       note.innerHTML = 'A further <strong>' + rest + ' pieces</strong> are held in the boutique and are being photographed. ' +
-        '<a href="?all=1">View the full catalogue</a> or ' +
+        '<a href="' + showAllHref() + '">View the full catalogue</a> or ' +
         '<a href="mailto:info@mozafarian.ae?subject=Mozafarian%20%E2%80%94%20catalogue%20enquiry">enquire about a specific piece</a>.';
       moreWrap.appendChild(note);
     }
