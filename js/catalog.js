@@ -34,14 +34,54 @@
   function reveal(el) { if (io) io.observe(el); else el.classList.add('is-in'); }
 
   /* ---------- data ---------- */
+  // Versioned like css/js: without it the browser keeps serving a stale
+  // catalogue, so price and photo updates never reach the visitor.
+  var DATA_V = 10;
+
   function loadProducts() {
-    return fetch('./data/products.json').then(function (r) {
+    return fetch('./data/products.json?v=' + DATA_V).then(function (r) {
       if (!r.ok) throw new Error('products.json ' + r.status);
       return r.json();
     });
   }
 
-  function priceLabel() { return 'Price on request'; }
+  // Pieces carrying a retail price show it; the rest of the house stays
+  // "on request" until the client prices them.
+  function money(n) { return '$' + Number(n).toLocaleString('en-US'); }
+  function priceLabel(p) {
+    return (p && p.price) ? money(p.price) : 'Price on request';
+  }
+
+  /* ---------- PDP spec table ----------
+     Built from whatever the piece actually carries, so a fully documented
+     consignment piece shows stones and certificate while an unpriced
+     catalogue entry still reads as a proper record. */
+  function specRows(p) {
+    var rows = [['Maison', 'Mozafarian · Since 1821', '']];
+    if (p.sku) rows.push(['Reference', p.sku, '']);
+    rows.push(['Category', p.category, '']);
+    if (p.metal) {
+      rows.push(['Metal', p.metal + (p.goldWeight ? ' · ' + p.goldWeight + ' g' : ''), '']);
+    }
+    if (p.stones && p.stones.length) {
+      p.stones.forEach(function (s, i) {
+        var bits = [];
+        if (s.pcs) bits.push(s.pcs + (Number(s.pcs) === 1 ? ' stone' : ' stones'));
+        if (s.cts) bits.push(s.cts + ' ct');
+        if (s.clarity) bits.push(s.clarity);
+        rows.push([i === 0 ? 'Diamonds' : '', (s.colour ? s.colour + ' — ' : '') + bits.join(' · '), '']);
+      });
+      if (p.totalCts) {
+        rows.push(['Total weight', p.totalCts + ' ct' + (p.totalPcs ? ' · ' + p.totalPcs + ' stones' : ''), '']);
+      }
+    }
+    if (p.lab && p.cert) rows.push(['Certificate', p.lab + ' ' + p.cert, 'v--gold']);
+    rows.push(['Availability', p.price ? 'In the boutique' : 'On request', 'v--gold']);
+    return rows.map(function (r) {
+      return '<div><span class="k">' + escapeHtml(r[0]) + '</span>' +
+             '<span class="v ' + r[2] + '">' + escapeHtml(String(r[1])) + '</span></div>';
+    }).join('');
+  }
 
   function enquireHref(p) {
     return waLink('I would like to enquire about "' + p.title + '" (' + p.category + '). ' +
@@ -69,7 +109,7 @@
       '<div class="card__media' + (hasImg ? '' : ' card__media--empty') + '">' + media + '</div>' +
       '<div class="card__body">' +
         '<h3 class="card__title">' + escapeHtml(p.title) + '</h3>' +
-        '<span class="card__price">' + priceLabel() + '</span>' +
+        '<span class="card__price' + (p.price ? ' card__price--set' : '') + '">' + priceLabel(p) + '</span>' +
       '</div>';
     if (hasImg) {
       var imgs = a.querySelectorAll('.card__img');
@@ -276,17 +316,18 @@
         '<div class="pdp__info">' +
           '<span class="eyebrow pdp__cat">' + p.category + '</span>' +
           '<h1 class="pdp__title">' + escapeHtml(p.title) + '</h1>' +
-          '<div class="pdp__price">' + priceLabel() + '</div>' +
-          '<div class="pdp__specs">' +
-            '<div><span class="k">Maison</span><span class="v">Mozafarian · Since 1821</span></div>' +
-            '<div><span class="k">Category</span><span class="v">' + p.category + '</span></div>' +
-            '<div><span class="k">Availability</span><span class="v v--gold">On request</span></div>' +
+          '<div class="pdp__price">' + priceLabel(p) +
+            (p.price ? '<span class="pdp__cur">' + (p.currency || 'USD') + '</span>' : '') +
           '</div>' +
+          '<div class="pdp__specs">' + specRows(p) + '</div>' +
           '<div class="pdp__actions">' +
             '<a class="btn btn--filled" target="_blank" rel="noopener" href="' + enquireHref(p) + '">Enquire on WhatsApp</a>' +
             '<a class="btn btn--ghost" href="mailto:' + MAILTO + '?subject=' + encodeURIComponent('Private viewing — ' + p.title) + '">Write to us</a>' +
           '</div>' +
-          '<p class="pdp__note">Each Mozafarian piece is offered on request. Our team will share pricing, certification and availability, and can arrange a private viewing at our Dubai or London boutique.</p>' +
+          '<p class="pdp__note">' + (p.price
+            ? 'Retail price shown in ' + (p.currency || 'USD') + ', excluding duties. This piece is held in the boutique and can be seen the same day — we will confirm availability and arrange a private viewing in Dubai or London.'
+            : 'This piece is offered on request. Our team will share pricing, certification and availability, and can arrange a private viewing at our Dubai or London boutique.') +
+          '</p>' +
         '</div>';
 
       var main = root.querySelector('#pdpMain');
