@@ -81,6 +81,19 @@
   .lang { padding: 2px; }
   .lang__opt { min-width: 28px; padding: 6px 5px; font-size: 0.55rem; letter-spacing: 0.08em; }
 }
+/* ---- currency, the quieter sibling ---- */
+.lang--currency { margin-left: 10px; }
+.lang--currency .lang__opt { min-width: 40px; font-size: 0.56rem; letter-spacing: 0.1em; }
+[dir="rtl"] .lang--currency { margin-left: 0; margin-right: 10px; }
+
+/* The converted figure names the quoted dollar price rather than replacing it. */
+.pdp__conv {
+  margin-top: 8px;
+  font-size: 0.66rem; letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.pdp__conv:empty { display: none; }
+
 /* Three languages plus MENU need room the wordmark was using: at 375px the
    header ran 40px past the edge. The crest keeps its size — it is the mark
    people recognise — and the wordmark gives up the tracking instead. */
@@ -89,7 +102,15 @@
   .header__right { gap: 10px; }
   .header__logo { font-size: 0.88rem; letter-spacing: 0.06em; gap: 8px; }
   .lang__opt { min-width: 24px; padding: 6px 3px; font-size: 0.52rem; letter-spacing: 0.06em; }
+  .lang--currency { margin-left: 6px; }
+  .lang--currency .lang__opt { min-width: 32px; font-size: 0.5rem; letter-spacing: 0.04em; }
   .menu-toggle { font-size: 0.62rem; letter-spacing: 0.14em; }
+}
+/* On a catalogue page the header also carries the currency, and at 375px the
+   two capsules plus MENU leave no room for the wordmark. The crest carries the
+   brand alone here; the landing page keeps its full logo. */
+@media (max-width: 560px) {
+  body.has-currency .header__logo span:not(.crown) { display: none; }
 }
 
 /* ============ ARABIC TYPOGRAPHY ============

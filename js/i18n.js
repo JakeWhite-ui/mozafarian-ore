@@ -250,8 +250,9 @@
       'Piece not found.': 'Изделие не найдено.',
       'This piece is offered on request. Our team will share pricing, certification and availability, and can arrange a private viewing at our Dubai or London boutique.':
         'Изделие предлагается по запросу. Мы сообщим цену, сертификацию и наличие и организуем частный показ в бутике в Дубае или Лондоне.',
-      'Retail price shown in USD, excluding duties. This piece is held in the boutique and can be seen the same day — we will confirm availability and arrange a private viewing in Dubai or London.':
-        'Розничная цена указана в долларах США, без пошлин. Изделие находится в бутике, его можно посмотреть в тот же день — мы подтвердим наличие и организуем частный показ в Дубае или Лондоне.',
+      'Retail price excludes duties. This piece is held in the boutique and can be seen the same day — we will confirm availability and arrange a private viewing in Dubai or London.':
+        'Розничная цена указана без пошлин. Изделие находится в бутике, его можно посмотреть в тот же день — мы подтвердим наличие и организуем частный показ в Дубае или Лондоне.',
+      'pdp.conv': 'Розничная цена {usd} · пересчёт по фиксированному курсу {rate} AED за доллар, с округлением.',
 
       /* ---- assembled at runtime by catalog.js (see I18N.t) ---- */
       '{n} pieces': function (p) { return p.n + ' ' + ruPlural(p.n, 'изделие', 'изделия', 'изделий'); },
@@ -486,8 +487,9 @@
       'Piece not found.': 'القطعة غير موجودة.',
       'This piece is offered on request. Our team will share pricing, certification and availability, and can arrange a private viewing at our Dubai or London boutique.':
         'تُعرض هذه القطعة عند الطلب. سيشارك فريقنا السعر والشهادة والتوفّر، ويمكنه ترتيب عرض خاص في بوتيك دبي أو لندن.',
-      'Retail price shown in USD, excluding duties. This piece is held in the boutique and can be seen the same day — we will confirm availability and arrange a private viewing in Dubai or London.':
-        'السعر معروض بالدولار الأمريكي، دون الرسوم. القطعة محفوظة في البوتيك ويمكن رؤيتها في اليوم نفسه — سنؤكد التوفّر ونرتّب عرضًا خاصًا في دبي أو لندن.',
+      'Retail price excludes duties. This piece is held in the boutique and can be seen the same day — we will confirm availability and arrange a private viewing in Dubai or London.':
+        'السعر لا يشمل الرسوم. القطعة محفوظة في البوتيك ويمكن رؤيتها في اليوم نفسه — سنؤكد التوفّر ونرتّب عرضًا خاصًا في دبي أو لندن.',
+      'pdp.conv': 'السعر بالدولار {usd} · محوّل بسعر الصرف الثابت {rate} درهم للدولار، مع التقريب.',
 
       /* ---- assembled at runtime by catalog.js (see I18N.t) ---- */
       '{n} pieces': function (p) { return arCount(p.n, 'قطعة واحدة', 'قطعتان', 'قطع', 'قطعة'); },
@@ -638,14 +640,27 @@
 
   var SKIP_TAGS = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, CODE: 1 };
 
+  // Piece names live in their own dictionary (js/i18n-titles.js): the catalogue
+  // is the client's data, not site copy, and most of it stays in English.
+  var TITLE_SCOPE = '.card__title, .pdp__title, .card__img, #pdpMain';
+
+  function titleOf(src) {
+    if (!window.MOZ_TITLES) return null;
+    return window.MOZ_TITLES.translate(src, lang);
+  }
+
   function translateText(node) {
     var parent = node.parentNode;
     if (!parent || SKIP_TAGS[parent.nodeName]) return;
     if (parent.closest && parent.closest('[data-i18n-skip]')) return;
 
     // The English source is recorded the first time we see the node, so a
-    // switch back to English restores it exactly.
-    if (node.__src === undefined) node.__src = node.nodeValue;
+    // switch back to English restores it exactly. If someone else has rewritten
+    // the node since — the currency switch reformats prices in place — the
+    // baseline is taken again, otherwise we would put the old price back.
+    if (node.__src === undefined || (node.__out !== undefined && node.nodeValue !== node.__out)) {
+      node.__src = node.nodeValue;
+    }
     var src = node.__src;
     if (!norm(src)) return;
 
@@ -653,6 +668,13 @@
     if (lang !== 'en') {
       var hit = lookup(src);
       if (hit === null && parent.matches && parent.matches(SUB_SCOPE)) hit = substitute(norm(src));
+      if (hit === null && parent.matches && parent.matches(TITLE_SCOPE)) hit = titleOf(src);
+      // the browser tab on a product page: "<piece> — Mozafarian"
+      if (hit === null && parent.nodeName === 'TITLE') {
+        var m = norm(src).match(/^(.+) — Mozafarian$/);
+        var piece = m && titleOf(m[1]);
+        if (piece) hit = piece + ' — Mozafarian';
+      }
       if (hit !== null) {
         // keep the whitespace that surrounded the phrase in the markup
         var lead = (src.match(/^\s*/) || [''])[0];
@@ -661,6 +683,7 @@
       }
     }
     if (node.nodeValue !== out) node.nodeValue = out;
+    node.__out = out;
   }
 
   var ATTRS = ['aria-label', 'placeholder', 'title', 'alt'];
@@ -680,7 +703,11 @@
       var store = '__attr_' + a;
       if (el[store] === undefined) el[store] = el.getAttribute(a);
       var val = el[store];
-      if (lang !== 'en') { var hit = lookup(val); if (hit !== null) val = hit; }
+      if (lang !== 'en') {
+        var hit = lookup(val);
+        if (hit === null && a === 'alt' && el.matches(TITLE_SCOPE)) hit = titleOf(val);
+        if (hit !== null) val = hit;
+      }
       if (el.getAttribute(a) !== val) el.setAttribute(a, val);
     }
     // social + search description follows the page language
@@ -761,7 +788,45 @@
   }
 
   /* ============================================================
-     5. The switcher
+     4b. Currency
+     The dirham is pegged to the dollar by the UAE central bank, so the
+     conversion is a fact rather than a quote of the day and needs no
+     live rate. The consignment list is written in dollars, so the dollar
+     stays the reference figure and the product page says so outright —
+     a converted, rounded number must not pass itself off as the house's
+     own price.
+     ============================================================ */
+  var CURRENCIES = ['AED', 'USD'];
+  var AED_PER_USD = 3.6725;
+  var AED_ROUND = 100;
+  var CUR_STORAGE = 'moz.currency';
+  var currency = 'AED';
+
+  function formatMoney(usd) {
+    var n = Number(usd);
+    if (!n) return '';
+    if (currency === 'USD') return '$' + n.toLocaleString('en-US');
+    var aed = Math.round(n * AED_PER_USD / AED_ROUND) * AED_ROUND;
+    var num = aed.toLocaleString('en-US');
+    return lang === 'ar' ? num + ' درهم' : 'AED ' + num;
+  }
+
+  function applyCurrency(next) {
+    currency = next;
+    try { localStorage.setItem(CUR_STORAGE, next); } catch (e) { /* private mode */ }
+    document.documentElement.setAttribute('data-currency', next);
+    document.dispatchEvent(new CustomEvent('moz:currencychange', { detail: { currency: next } }));
+    syncSwitchers();
+  }
+
+  function initialCurrency() {
+    var stored = null;
+    try { stored = localStorage.getItem(CUR_STORAGE); } catch (e) { /* private mode */ }
+    return CURRENCIES.indexOf(stored) > -1 ? stored : 'AED';
+  }
+
+  /* ============================================================
+     5. The switchers
      ============================================================ */
   function buildSwitcher() {
     var wrap = document.createElement('div');
@@ -788,8 +853,31 @@
     return wrap;
   }
 
-  function movePill(wrap) {
-    var active = wrap.querySelector('.lang__opt[data-lang="' + lang + '"]');
+  function buildCurrencySwitcher() {
+    var wrap = document.createElement('div');
+    wrap.className = 'lang lang--currency';
+    wrap.setAttribute('role', 'group');
+    wrap.setAttribute('aria-label', 'Currency');
+    wrap.setAttribute('data-i18n-skip', '');
+    wrap.innerHTML = '<span class="lang__pill" aria-hidden="true"></span>' +
+      CURRENCIES.map(function (c) {
+        return '<button type="button" class="lang__opt" data-currency="' + c + '">' + c + '</button>';
+      }).join('');
+
+    wrap.addEventListener('click', function (e) {
+      var btn = e.target.closest('.lang__opt');
+      if (!btn) return;
+      var code = btn.getAttribute('data-currency');
+      if (code === currency) return;
+      wrap.classList.add('is-changing');
+      setTimeout(function () { wrap.classList.remove('is-changing'); }, 700);
+      applyCurrency(code);
+    });
+    return wrap;
+  }
+
+  function movePill(wrap, sel) {
+    var active = wrap.querySelector(sel);
     var pill = wrap.querySelector('.lang__pill');
     if (!active || !pill) return;
     pill.style.width = active.offsetWidth + 'px';
@@ -797,25 +885,38 @@
   }
 
   function syncSwitchers() {
-    var all = document.querySelectorAll('.lang');
-    Array.prototype.forEach.call(all, function (wrap) {
+    Array.prototype.forEach.call(document.querySelectorAll('.lang'), function (wrap) {
+      var isCur = wrap.classList.contains('lang--currency');
+      var attr = isCur ? 'data-currency' : 'data-lang';
+      var now = isCur ? currency : lang;
       Array.prototype.forEach.call(wrap.querySelectorAll('.lang__opt'), function (b) {
-        var on = b.getAttribute('data-lang') === lang;
+        var on = b.getAttribute(attr) === now;
         b.classList.toggle('is-active', on);
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
-      movePill(wrap);
+      movePill(wrap, '.lang__opt[' + attr + '="' + now + '"]');
     });
+  }
+
+  // The currency control only appears where there are prices to convert.
+  function pageHasPrices() {
+    return !!(document.getElementById('catGrid') || document.getElementById('pdp'));
   }
 
   function mountSwitchers() {
     var slots = document.querySelectorAll('.header__right');
     Array.prototype.forEach.call(slots, function (slot) {
-      if (slot.querySelector('.lang')) return;
       var toggle = slot.querySelector('.menu-toggle');
-      var sw = buildSwitcher();
-      run(function () { slot.insertBefore(sw, toggle || null); });
-      // fonts settle a frame later; measure the pill after that
+      if (!slot.querySelector('.lang:not(.lang--currency)')) {
+        var sw = buildSwitcher();
+        run(function () { slot.insertBefore(sw, toggle || null); });
+      }
+      if (pageHasPrices() && !slot.querySelector('.lang--currency')) {
+        var cw = buildCurrencySwitcher();
+        run(function () { slot.insertBefore(cw, toggle || null); });
+        document.body.classList.add('has-currency');
+      }
+      // fonts settle a frame later; measure the pills after that
       requestAnimationFrame(function () { syncSwitchers(); });
       setTimeout(syncSwitchers, 400);
     });
@@ -853,6 +954,8 @@
   });
 
   lang = initialLang();
+  currency = initialCurrency();
+  document.documentElement.setAttribute('data-currency', currency);
   var meta0 = LANGS.filter(function (l) { return l.code === lang; })[0];
   document.documentElement.setAttribute('lang', meta0.htmlLang);
   document.documentElement.setAttribute('dir', meta0.dir);
@@ -887,5 +990,14 @@
       if (lang === 'ru') return ruPlural(n, forms.one, forms.few, forms.many);
       return n === 1 ? forms.one : forms.many;
     }
+  };
+
+  window.MONEY = {
+    get code() { return currency; },
+    set: applyCurrency,
+    rate: AED_PER_USD,
+    /* format(5100) -> "AED 18,700" · "$5,100" · "18,700 درهم" */
+    format: formatMoney,
+    usd: function (n) { return '$' + Number(n).toLocaleString('en-US'); }
   };
 })();

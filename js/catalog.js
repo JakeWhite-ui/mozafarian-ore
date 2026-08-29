@@ -46,8 +46,11 @@
   }
 
   // Pieces carrying a retail price show it; the rest of the house stays
-  // "on request" until the client prices them.
-  function money(n) { return '$' + Number(n).toLocaleString('en-US'); }
+  // "on request" until the client prices them. The figure itself is formatted
+  // by the currency module, so AED and USD share one code path.
+  function money(n) {
+    return window.MONEY ? window.MONEY.format(n) : '$' + Number(n).toLocaleString('en-US');
+  }
   function priceLabel(p) {
     return (p && p.price) ? money(p.price) : 'Price on request';
   }
@@ -109,7 +112,8 @@
       '<div class="card__media' + (hasImg ? '' : ' card__media--empty') + '">' + media + '</div>' +
       '<div class="card__body">' +
         '<h3 class="card__title">' + escapeHtml(p.title) + '</h3>' +
-        '<span class="card__price' + (p.price ? ' card__price--set' : '') + '">' + priceLabel(p) + '</span>' +
+        '<span class="card__price' + (p.price ? ' card__price--set' : '') + '"' +
+          (p.price ? ' data-usd="' + p.price + '"' : '') + '>' + priceLabel(p) + '</span>' +
       '</div>';
     if (hasImg) {
       var imgs = a.querySelectorAll('.card__img');
@@ -326,16 +330,18 @@
         '<div class="pdp__info">' +
           '<span class="eyebrow pdp__cat">' + p.category + '</span>' +
           '<h1 class="pdp__title">' + escapeHtml(p.title) + '</h1>' +
-          '<div class="pdp__price">' + priceLabel(p) +
-            (p.price ? '<span class="pdp__cur">' + (p.currency || 'USD') + '</span>' : '') +
+          '<div class="pdp__price">' +
+            '<span class="pdp__amt"' + (p.price ? ' data-usd="' + p.price + '"' : '') + '>' + priceLabel(p) + '</span>' +
+            (p.price ? '<span class="pdp__cur">' + curCode() + '</span>' : '') +
           '</div>' +
+          (p.price ? '<p class="pdp__conv" data-usd="' + p.price + '">' + convLine(p.price) + '</p>' : '') +
           '<div class="pdp__specs">' + specRows(p) + '</div>' +
           '<div class="pdp__actions">' +
             '<a class="btn btn--filled" target="_blank" rel="noopener" href="' + enquireHref(p) + '">Enquire on WhatsApp</a>' +
             '<a class="btn btn--ghost" href="mailto:' + MAILTO + '?subject=' + encodeURIComponent('Private viewing — ' + p.title) + '">Write to us</a>' +
           '</div>' +
           '<p class="pdp__note">' + (p.price
-            ? 'Retail price shown in ' + (p.currency || 'USD') + ', excluding duties. This piece is held in the boutique and can be seen the same day — we will confirm availability and arrange a private viewing in Dubai or London.'
+            ? 'Retail price excludes duties. This piece is held in the boutique and can be seen the same day — we will confirm availability and arrange a private viewing in Dubai or London.'
             : 'This piece is offered on request. Our team will share pricing, certification and availability, and can arrange a private viewing at our Dubai or London boutique.') +
           '</p>' +
         '</div>';
@@ -471,6 +477,31 @@
     return window.I18N ? window.I18N.t('{n} pieces', { n: n })
                        : n + ' piece' + (n === 1 ? '' : 's');
   }
+
+  function curCode() { return window.MONEY ? window.MONEY.code : 'USD'; }
+
+  // Shown only in dirhams: the dollar figure is the one the house quoted, and
+  // a converted, rounded number should say so rather than stand in for it.
+  function convLine(usd) {
+    if (!window.MONEY || window.MONEY.code !== 'AED') return '';
+    return t('pdp.conv', 'Retail price {usd} · converted at {rate} AED to the dollar and rounded.',
+      { usd: window.MONEY.usd(usd), rate: window.MONEY.rate });
+  }
+
+  // Prices are rewritten where they stand instead of rebuilding the grid, so
+  // switching currency does not throw the visitor back to the top of 570 cards.
+  function repriceAll() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-usd]'), function (el) {
+      var usd = el.getAttribute('data-usd');
+      if (el.classList.contains('pdp__conv')) { el.textContent = convLine(usd); return; }
+      el.textContent = money(usd);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.pdp__cur'), function (el) {
+      el.textContent = curCode();
+    });
+  }
+  document.addEventListener('moz:currencychange', repriceAll);
+  document.addEventListener('moz:langchange', repriceAll);
 
   var WHATSAPP = '971561394378';
   // Enquiries go to WhatsApp with the message already written: in this market
