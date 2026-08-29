@@ -177,18 +177,22 @@
       if (!scope.some(hasImg) && document.querySelector('.lookbook') && !state.showAll) {
         filterBar.style.display = 'none';
         grid.style.display = 'none';
-        moreWrap.innerHTML =
-          '<div class="cat-archive">The full collection runs to <strong>' + scope.length +
-          ' pieces</strong>, catalogued and held in the boutique while photography is completed. ' +
-          '<a href="' + showAllHref() + '">Browse the full collection</a> or ' +
-          '<a target="_blank" rel="noopener" href="' + waLink('I would like to ask about a piece from the collection.') + '">ask us about a piece</a>.</div>';
+        moreWrap.innerHTML = '<div class="cat-archive">' + t('archive.whole',
+          'The full collection runs to <strong>{pieces}</strong>, catalogued and held in the boutique while photography is completed. ' +
+          '<a href="{all}">Browse the full collection</a> or ' +
+          '<a target="_blank" rel="noopener" href="{wa}">ask us about a piece</a>.',
+          {
+            pieces: pieces(scope.length),
+            all: showAllHref(),
+            wa: waLink('I would like to ask about a piece from the collection.')
+          }) + '</div>';
         return;
       }
 
       buildFilters(scope);
       applyFilter(state.cat);
     }).catch(function (err) {
-      grid.innerHTML = '<div class="cat-empty">Catalogue unavailable. ' + escapeHtml(String(err.message)) + '</div>';
+      grid.innerHTML = '<div class="cat-empty"><span>Catalogue unavailable.</span> ' + escapeHtml(String(err.message)) + '</div>';
     });
 
     // Built from the whole scope so every category the menu and the hub link to
@@ -242,7 +246,7 @@
       next.forEach(function (p) { frag.appendChild(cardEl(p)); });
       grid.appendChild(frag);
       state.shown += next.length;
-      countEl.textContent = state.filtered.length + ' pieces';
+      countEl.textContent = pieces(state.filtered.length);
       moreWrap.innerHTML = '';
       if (state.shown < state.filtered.length) {
         var btn = document.createElement('button');
@@ -271,9 +275,15 @@
       if (rest <= 0) return;
       var note = document.createElement('div');
       note.className = 'cat-archive';
-      note.innerHTML = 'A further <strong>' + rest + ' pieces</strong> are held in the boutique and are being photographed. ' +
-        '<a href="' + showAllHref() + '">View the full catalogue</a> or ' +
-        '<a target="_blank" rel="noopener" href="' + waLink('I would like to enquire about a piece that is not yet shown on the site.') + '">enquire about a specific piece</a>.';
+      note.innerHTML = t('archive.rest',
+        'A further <strong>{pieces}</strong> are held in the boutique and are being photographed. ' +
+        '<a href="{all}">View the full catalogue</a> or ' +
+        '<a target="_blank" rel="noopener" href="{wa}">enquire about a specific piece</a>.',
+        {
+          pieces: pieces(rest),
+          all: showAllHref(),
+          wa: waLink('I would like to enquire about a piece that is not yet shown on the site.')
+        });
       moreWrap.appendChild(note);
     }
 
@@ -292,12 +302,12 @@
 
     loadProducts().then(function (data) {
       var p = data.find(function (x) { return x.handle === handle; });
-      if (!p) { root.innerHTML = '<div class="cat-empty">Piece not found. <a href="./shop.html" style="color:var(--powder)">Back to catalogue</a></div>'; return; }
+      if (!p) { root.innerHTML = '<div class="cat-empty"><span>Piece not found.</span> <a href="./shop.html" style="color:var(--powder)">Back to catalogue</a></div>'; return; }
       document.title = p.title + ' — Mozafarian';
       renderPDP(root, p);
       renderRelated(data, p);
     }).catch(function (err) {
-      root.innerHTML = '<div class="cat-empty">Unavailable. ' + escapeHtml(String(err.message)) + '</div>';
+      root.innerHTML = '<div class="cat-empty"><span>Unavailable.</span> ' + escapeHtml(String(err.message)) + '</div>';
     });
 
     function renderPDP(root, p) {
@@ -385,7 +395,7 @@
       // "view all" tile
       grid.appendChild(hubTile({ label: 'View all pieces', cat: null }, data.length, A + 'moz-110.jpg'));
     }).catch(function (err) {
-      grid.innerHTML = '<div class="cat-empty">Unavailable. ' + escapeHtml(String(err.message)) + '</div>';
+      grid.innerHTML = '<div class="cat-empty"><span>Unavailable.</span> ' + escapeHtml(String(err.message)) + '</div>';
     });
 
     function hubTile(t, n, img) {
@@ -399,7 +409,7 @@
         media +
         '<div class="hub-tile__body">' +
           '<span class="hub-tile__label">' + t.label + '</span>' +
-          '<span class="hub-tile__count">' + n + ' piece' + (n === 1 ? '' : 's') + '</span>' +
+          '<span class="hub-tile__count">' + pieces(n) + '</span>' +
           '<span class="hub-tile__cta">Discover &rarr;</span>' +
         '</div>';
       if (img) setImg(a.querySelector('.hub-tile__img'), img);
@@ -445,6 +455,23 @@
   }
 
   /* ---------- utils ---------- */
+  // Sentences the page assembles itself (a count, two links) cannot be
+  // translated node by node without scrambling the word order, so they go
+  // through the dictionary whole. Without i18n.js the English template stands.
+  function t(key, en, params) {
+    if (window.I18N) {
+      var out = window.I18N.t(key, params);
+      if (out !== key) return out;
+    }
+    return String(en).replace(/\{(\w+)\}/g, function (m, k) {
+      return (params && params[k] !== undefined) ? params[k] : m;
+    });
+  }
+  function pieces(n) {
+    return window.I18N ? window.I18N.t('{n} pieces', { n: n })
+                       : n + ' piece' + (n === 1 ? '' : 's');
+  }
+
   var WHATSAPP = '971561394378';
   // Enquiries go to WhatsApp with the message already written: in this market
   // it is how a client reaches a jeweller, and a mailto asks them to leave the

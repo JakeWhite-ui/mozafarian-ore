@@ -23,8 +23,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="./css/styles.css?v=10">
-<link rel="stylesheet" href="./css/catalog.css?v=10">
+<link rel="stylesheet" href="./css/styles.css?v=11">
+<link rel="stylesheet" href="./css/catalog.css?v=11">
+<link rel="stylesheet" href="./css/i18n.css?v=11">
 
   <link rel="icon" href="./assets/brand/icon.svg?v=2" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/icon-32.png?v=2">
@@ -56,6 +57,9 @@
   "areaServed": { "@type": "Country", "name": "United Arab Emirates" }
 }
 </script>
+
+<!-- Trilingual layer: EN / RU / AR. Runs before the body is parsed. -->
+<script src="./js/i18n.js?v=11"></script>
 </head>
 <body>
 
@@ -113,7 +117,7 @@
       <div class="hero__overlay"></div>
       <div class="hero__content">
         <span class="hero__eyebrow reveal-fade">Fine Jewellers Since 1821</span>
-        <h1 class="hero__title">
+        <h1 class="hero__title" data-i18n="hero.title">
           <span class="line"><span>Seven generations</span></span>
           <span class="line"><span>of fine <em>jewellery.</em></span></span>
         </h1>
@@ -237,7 +241,7 @@
       <div class="featured__scrim"></div>
       <div class="section__inner featured__content">
         <span class="eyebrow">Best Seller</span>
-        <h2 class="featured__title reveal-lines">
+        <h2 class="featured__title reveal-lines" data-i18n="featured.title">
           <span class="line"><span>Art Deco Diamond</span></span>
           <span class="line"><span>&amp; Sapphire Ring</span></span>
         </h2>
@@ -255,7 +259,7 @@
     <section class="maison scene" id="maison">
       <div class="maison__inner">
         <span class="eyebrow">The Maison</span>
-        <p class="maison__text reveal-lines">
+        <p class="maison__text reveal-lines" data-i18n="maison.text">
           <span class="line"><span>In 1821, the family left Neuch&acirc;tel for Persia</span></span>
           <span class="line"><span>under royal patronage. A marriage gave the</span></span>
           <span class="line"><span>house its name — <em>Mozafarian</em>, “the victorious.”</span></span>
@@ -275,7 +279,7 @@
       <div class="contact__overlay"></div>
       <div class="contact__content">
         <span class="eyebrow">Bespoke</span>
-        <h2 class="contact__title reveal-lines">
+        <h2 class="contact__title reveal-lines" data-i18n="contact.title">
           <span class="line"><span>Let us tell</span></span>
           <span class="line"><span>your <em>story.</em></span></span>
         </h2>
@@ -314,6 +318,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="./js/main.js?v=10"></script>
+  <script src="./js/main.js?v=11"></script>
 </body>
 </html>
