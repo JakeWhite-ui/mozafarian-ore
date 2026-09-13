@@ -235,9 +235,31 @@
     wrap.addEventListener('mousedown', (e) => { e.preventDefault(); down(e.clientX); });
     window.addEventListener('mousemove', (e) => move(e.clientX));
     window.addEventListener('mouseup', up);
-    wrap.addEventListener('touchstart', (e) => down(e.touches[0].clientX), { passive: true });
-    wrap.addEventListener('touchmove', (e) => move(e.touches[0].clientX), { passive: true });
+
+    // Touch: decide the gesture's axis first, so a vertical scroll of the page
+    // never drags the carousel and a horizontal swipe never fights the page.
+    let tStartX = 0, tStartY = 0, tAxis = null;
+    wrap.addEventListener('touchstart', (e) => {
+      const t = e.touches[0]; tStartX = t.clientX; tStartY = t.clientY; tAxis = null;
+      down(t.clientX);
+    }, { passive: true });
+    wrap.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      if (tAxis === null) {
+        const dx = Math.abs(t.clientX - tStartX), dy = Math.abs(t.clientY - tStartY);
+        if (dx < 6 && dy < 6) return;                 // wait until the intent is clear
+        tAxis = dx > dy ? 'x' : 'y';
+        if (tAxis === 'y') { dragging = false; wrap.classList.remove('is-dragging'); } // hand it to the page
+      }
+      if (tAxis === 'x') { e.preventDefault(); move(t.clientX); }  // drive the track, hold the page still
+    }, { passive: false });
     wrap.addEventListener('touchend', up);
+    wrap.addEventListener('touchcancel', up);
+
+    // Trackpad / horizontal wheel scrubs the track without hijacking vertical scroll.
+    wrap.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); target = clamp(target - e.deltaX, min, max); }
+    }, { passive: false });
     // click a side card to bring it to centre
     items.forEach((it, i) => it.addEventListener('click', () => { if (Math.abs(velocity) < 3) target = snapPos(i); }));
 

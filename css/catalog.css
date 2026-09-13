@@ -286,6 +286,12 @@
 .menu-overlay__catlist a:hover { color: var(--powder); padding-left: 10px; }
 .menu-overlay__meta a { color: var(--muted); transition: color .3s var(--ease); }
 .menu-overlay__meta a:hover { color: var(--powder); }
+/* wide screens: push the nav and the category column to opposite edges of the
+   centred band so the composition fills the space and reads as intentional */
+@media (min-width: 1000px) {
+  .menu-overlay--rich .menu-overlay__cols { flex-wrap: nowrap; justify-content: space-between; }
+  .menu-overlay--rich .menu-overlay__sub { padding-top: 6px; min-width: 220px; }
+}
 @media (max-width: 760px) {
   .menu-overlay__cols { gap: 30px; }
   .menu-overlay--rich .menu-overlay__list a { font-size: clamp(2rem, 11vw, 3.4rem); }
