@@ -14,6 +14,11 @@
 
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'Jost', sans-serif;
+  /* aliases used across catalog.css — without these, prices/titles silently
+     fell back from Cormorant to Jost (the commercial core in plain sans) */
+  --serif: 'Cormorant Garamond', serif;
+  --sans: 'Jost', sans-serif;
+  --content-max-width: 1200px;
 
   --edge: clamp(20px, 5vw, 80px);
   --track-label: 0.2em;
