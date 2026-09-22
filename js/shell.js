@@ -145,8 +145,11 @@
     var toggle = document.getElementById('menuToggle');
     var overlay = document.getElementById('menuOverlay');
     if (!toggle || !overlay) return;
+    overlay.inert = true; // out of the tab order until opened
     toggle.addEventListener('click', function () {
       var open = overlay.classList.toggle('is-open');
+      overlay.inert = !open;
+      document.body.classList.toggle('menu-open', open); // lock scroll behind the overlay
       overlay.setAttribute('aria-hidden', open ? 'false' : 'true');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.textContent = open ? 'CLOSE' : 'MENU';

@@ -36,7 +36,7 @@
   /* ---------- data ---------- */
   // Versioned like css/js: without it the browser keeps serving a stale
   // catalogue, so price and photo updates never reach the visitor.
-  var DATA_V = 10;
+  var DATA_V = 11;
 
   function loadProducts() {
     return fetch('./data/products.json?v=' + DATA_V).then(function (r) {
@@ -307,12 +307,40 @@
     loadProducts().then(function (data) {
       var p = data.find(function (x) { return x.handle === handle; });
       if (!p) { root.innerHTML = '<div class="cat-empty"><span>Piece not found.</span> <a href="./shop.html" style="color:var(--powder)">Back to catalogue</a></div>'; return; }
-      document.title = p.title + ' — Mozafarian';
+      setPdpMeta(p);
+      updateCrumb(p);
       renderPDP(root, p);
       renderRelated(data, p);
     }).catch(function (err) {
       root.innerHTML = '<div class="cat-empty"><span>Unavailable.</span> ' + escapeHtml(String(err.message)) + '</div>';
     });
+
+    // Per-product SEO/share meta — the static page ships a generic "Piece" head;
+    // without this every product shares one canonical/title/og card and collapses
+    // to a single indexable page, and every shared link previews as "Piece".
+    function setMeta(sel, attr, val) { var el = document.querySelector(sel); if (el) el.setAttribute(attr, val); }
+    function setPdpMeta(p) {
+      var url = location.origin + location.pathname + '?handle=' + encodeURIComponent(p.handle);
+      var title = p.title + ' — Mozafarian';
+      var img = (p.images && p.images.length) ? new URL(p.images[0], location.href).href
+              : 'https://jakewhite-ui.github.io/mozafarian-ore/assets/og-cover.jpg';
+      var desc = p.category + (p.spec ? ' · ' + p.spec : '') +
+        ' — Mozafarian, fine jewellers since 1821. Offered on request · Dubai & London.';
+      document.title = title;
+      setMeta('link[rel="canonical"]', 'href', url);
+      setMeta('meta[property="og:url"]', 'content', url);
+      setMeta('meta[property="og:title"]', 'content', title);
+      setMeta('meta[property="og:description"]', 'content', desc);
+      setMeta('meta[name="description"]', 'content', desc);
+      setMeta('meta[property="og:image"]', 'content', img);
+    }
+    function updateCrumb(p) {
+      var c = document.querySelector('.crumb');
+      if (!c) return;
+      c.innerHTML = '<a href="./shop.html">Catalogue</a> &nbsp;/&nbsp; ' +
+        '<a href="./shop.html?category=' + encodeURIComponent(p.category) + '">' + escapeHtml(p.category) + '</a>' +
+        ' &nbsp;/&nbsp; <span>' + escapeHtml(p.title) + '</span>';
+    }
 
     function renderPDP(root, p) {
       var hasImg = p.images && p.images.length;

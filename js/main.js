@@ -82,8 +82,10 @@
   const menu = document.getElementById('menuOverlay');
   const menuToggle = document.getElementById('menuToggle');
   let menuOpen = false;
+  if (menu) menu.inert = true; // closed menu is out of the tab order until opened
   function openMenu() {
-    menuOpen = true; menu.classList.add('is-open');
+    menuOpen = true; menu.classList.add('is-open'); menu.inert = false;
+    document.body.classList.add('menu-open'); if (lenis) lenis.stop();
     menu.setAttribute('aria-hidden', 'false'); menuToggle.setAttribute('aria-expanded', 'true');
     if (!reduce) scramble(menuToggle, 'CLOSE', { duration: 450 }); else menuToggle.textContent = 'CLOSE';
     if (hasGSAP && !reduce) gsap.fromTo('.menu-overlay__list a',
@@ -91,11 +93,13 @@
   }
   function closeMenu() {
     if (!menuOpen) return;
-    menuOpen = false; menu.classList.remove('is-open');
+    menuOpen = false; menu.classList.remove('is-open'); menu.inert = true;
+    document.body.classList.remove('menu-open'); if (lenis) lenis.start();
     menu.setAttribute('aria-hidden', 'true'); menuToggle.setAttribute('aria-expanded', 'false');
     if (!reduce) scramble(menuToggle, 'MENU', { duration: 450 }); else menuToggle.textContent = 'MENU';
   }
   menuToggle?.addEventListener('click', () => (menuOpen ? closeMenu() : openMenu()));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) closeMenu(); });
 
   /* ---------------- TEXT / FADE REVEALS ---------------- */
   function initReveals() {
@@ -262,6 +266,17 @@
     }, { passive: false });
     // click a side card to bring it to centre
     items.forEach((it, i) => it.addEventListener('click', () => { if (Math.abs(velocity) < 3) target = snapPos(i); }));
+
+    /* keyboard access — arrow keys step between cards (drag was mouse/touch only) */
+    wrap.setAttribute('tabindex', '0');
+    wrap.setAttribute('role', 'group');
+    wrap.setAttribute('aria-label', 'Collections — use the left and right arrow keys');
+    wrap.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const next = clamp(nearestIndex(target) + (e.key === 'ArrowRight' ? 1 : -1), 0, total - 1);
+      target = snapPos(next);
+    });
 
     /* cursor label */
     const cursor = document.getElementById('cursorLabel');

@@ -60,6 +60,8 @@
 .cat-filter.is-active { color: var(--powder); }
 .cat-filter.is-active::after { width: 100%; }
 .cat-count { margin-left: auto; font-size: 0.68rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+/* roomier tap target for the filter chips on touch (the bar has the space) */
+@media (hover: none) { .cat-filter { padding-block: 12px; } }
 
 /* ============ LOOKBOOK (editorial, no SKU) ============ */
 .lookbook { padding: clamp(50px, 7vw, 100px) var(--edge) clamp(30px, 4vw, 60px); }

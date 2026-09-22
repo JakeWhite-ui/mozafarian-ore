@@ -269,9 +269,9 @@ button { font-family: inherit; color: inherit; background: none; border: none; c
 /* ============ MAISON — powder "chapter" (tonal shift, ORE-style) ============ */
 .maison { min-height: 90vh; display: flex; align-items: center; justify-content: center; padding: clamp(80px,14vh,180px) var(--edge); text-align: center; background: var(--powder); color: #1a1210; }
 .maison__inner { max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 30px; }
-.maison__inner .eyebrow { display: block; color: #8a4f3a; }
+.maison__inner .eyebrow { display: block; color: #6e3826; }
 .maison__text { font-family: var(--font-display); font-size: clamp(1.5rem, 3.4vw, 2.6rem); line-height: 1.4; color: #1a1210; }
-.maison__text em { font-style: italic; color: #9a6a24; }
+.maison__text em { font-style: italic; color: #6a4410; }
 .maison__sign { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: #6b4a42; }
 
 /* ============ CONTACT ============ */
@@ -313,6 +313,18 @@ button { font-family: inherit; color: inherit; background: none; border: none; c
      decorative — the crest and MENU are what the header has to carry. */
   .header__code { display: none; }
   .header__logo { font-size: 1.1rem; letter-spacing: 0.12em; }
+}
+
+/* ============ FOCUS & TOUCH (a11y) ============ */
+/* the a{color:inherit} reset strips the default caret — give keyboard users a ring */
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+/* lock the page behind the fullscreen menu so it can't scroll under the overlay */
+body.menu-open { overflow: hidden; }
+/* Grow tap targets on touch without moving layout: padding enlarges the hit box,
+   the matching negative margin keeps the visual footprint identical. */
+@media (hover: none) {
+  .menu-toggle { padding: 13px; margin: -13px; }
+  .lang__opt { padding-block: 10px; }
 }
 
 /* ============ REDUCED MOTION ============ */
