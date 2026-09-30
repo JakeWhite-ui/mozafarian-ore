@@ -36,7 +36,7 @@
   /* ---------- data ---------- */
   // Versioned like css/js: without it the browser keeps serving a stale
   // catalogue, so price and photo updates never reach the visitor.
-  var DATA_V = 12;
+  var DATA_V = 13;
 
   function loadProducts() {
     return fetch('./data/products.json?v=' + DATA_V).then(function (r) {

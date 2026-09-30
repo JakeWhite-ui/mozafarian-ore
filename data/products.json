@@ -4431,7 +4431,10 @@
   "handle": "cartier-santos-wssa0018-silvered-opaline-dial-39-8mm-stainless-steel-men-s-watch",
   "title": "Cartier Santos Wssa0018 Silvered Opaline Dial 39.8Mm Stainless Steel Men’S Watch",
   "category": "Watches",
-  "images": [],
+  "images": [
+   "./assets/products/mwatch-0522.jpg",
+   "./assets/products/mwatch-0523.jpg"
+  ],
   "g": "him"
  },
  {
@@ -5394,5 +5397,118 @@
   "category": "Charms",
   "images": [],
   "g": "her"
+ },
+ {
+  "handle": "cartier-santos-stainless-steel-green-dial-mz",
+  "title": "Cartier Santos — Stainless Steel · Green Dial",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0525.jpg",
+   "./assets/products/mwatch-0526.jpg"
+  ],
+  "shot": 1
+ },
+ {
+  "handle": "rolex-datejust-41-oystersteel-blue-dial-jubilee-bracelet-mz",
+  "title": "Rolex Datejust 41 — Oystersteel · Blue Dial · Jubilee Bracelet",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0506.jpg",
+   "./assets/products/mwatch-0507.jpg",
+   "./assets/products/mwatch-0509.jpg"
+  ],
+  "shot": 1
+ },
+ {
+  "handle": "rolex-submariner-date-oystersteel-blue-dial-ceramic-bezel-mz",
+  "title": "Rolex Submariner Date — Oystersteel · Blue Dial · Ceramic Bezel",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0514.jpg",
+   "./assets/products/mwatch-0518.jpg",
+   "./assets/products/mwatch-0519.jpg"
+  ],
+  "shot": 1
+ },
+ {
+  "handle": "patek-philippe-nautilus-stainless-steel-blue-dial-mz",
+  "title": "Patek Philippe Nautilus — Stainless Steel · Blue Dial",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0529.jpg",
+   "./assets/products/mwatch-0530.jpg",
+   "./assets/products/mwatch-0531.jpg"
+  ],
+  "shot": 1
+ },
+ {
+  "handle": "patek-philippe-nautilus-18ct-rose-gold-mz",
+  "title": "Patek Philippe Nautilus — 18ct Rose Gold",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0533.jpg",
+   "./assets/products/mwatch-0534.jpg",
+   "./assets/products/mwatch-0535.jpg"
+  ],
+  "shot": 1
+ },
+ {
+  "handle": "audemars-piguet-royal-oak-18ct-rose-gold-blue-dial-mz",
+  "title": "Audemars Piguet Royal Oak — 18ct Rose Gold · Blue Dial",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0484.jpg"
+  ],
+  "shot": 1
+ },
+ {
+  "handle": "audemars-piguet-royal-oak-18ct-rose-gold-black-dial-mz",
+  "title": "Audemars Piguet Royal Oak — 18ct Rose Gold · Black Dial",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0487.jpg"
+  ],
+  "shot": 1
+ },
+ {
+  "handle": "audemars-piguet-royal-oak-stainless-steel-mz",
+  "title": "Audemars Piguet Royal Oak — Stainless Steel",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0490.jpg",
+   "./assets/products/mwatch-0495.jpg",
+   "./assets/products/mwatch-0498.jpg"
+  ],
+  "shot": 1
+ },
+ {
+  "handle": "audemars-piguet-royal-oak-stainless-steel-silver-dial-mz",
+  "title": "Audemars Piguet Royal Oak — Stainless Steel · Silver Dial",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0497.jpg"
+  ],
+  "shot": 1
+ },
+ {
+  "handle": "audemars-piguet-royal-oak-chronograph-stainless-steel-mz",
+  "title": "Audemars Piguet Royal Oak Chronograph — Stainless Steel",
+  "category": "Watches",
+  "g": "him",
+  "images": [
+   "./assets/products/mwatch-0500.jpg",
+   "./assets/products/mwatch-0501.jpg",
+   "./assets/products/mwatch-0502.jpg"
+  ],
+  "shot": 1
  }
 ]
