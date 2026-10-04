@@ -36,7 +36,13 @@
   /* ---------- data ---------- */
   // Versioned like css/js: without it the browser keeps serving a stale
   // catalogue, so price and photo updates never reach the visitor.
-  var DATA_V = 14;
+  var DATA_V = 15;
+
+  // Photos get re-cropped in place under the same filenames, so the path alone
+  // cannot bust the cache — version the image URLs off DATA_V as well.
+  function assetUrl(src) {
+    return src + (src.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
+  }
 
   function loadProducts() {
     return fetch('./data/products.json?v=' + DATA_V).then(function (r) {
@@ -128,7 +134,7 @@
     if (!img || !src) return;
     img.addEventListener('load', function () { img.classList.add('is-loaded'); });
     img.addEventListener('error', function () { img.style.display = 'none'; });
-    img.src = src;
+    img.src = assetUrl(src);
   }
 
   /* ---------- SHOP page ---------- */
@@ -378,7 +384,7 @@
       Array.prototype.forEach.call(root.querySelectorAll('.pdp__thumb'), function (t) {
         t.addEventListener('click', function () {
           var i = +t.getAttribute('data-i');
-          main.src = p.images[i];
+          main.src = assetUrl(p.images[i]);
           root.querySelectorAll('.pdp__thumb').forEach(function (x) { x.classList.remove('is-active'); });
           t.classList.add('is-active');
         });

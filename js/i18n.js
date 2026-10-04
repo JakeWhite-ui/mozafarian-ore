@@ -136,14 +136,14 @@
       'Engagement': 'Помолвка',
       'Engagement rings': 'Помолвочные кольца',
       'A solitaire, a halo, or a setting drawn for her alone. We start with the stone — you see it loose, in daylight, before anything is decided — and only then choose how it should be held.':
-        'Солитер, ореол или оправа, нарисованная для неё одной. Мы начинаем с камня — вы видите его отдельно, при дневном свете, до всяких решений — и лишь затем выбираем, как его держать.',
+        'Солитер, ореол или оправа, созданная для неё одной. Мы начинаем с камня — вы видите его отдельно, при дневном свете, до всяких решений — и лишь затем выбираем, как его закрепить.',
       'Wedding': 'Свадьба',
       'Wedding & couples\' bands': 'Обручальные и парные кольца',
       'Platinum and 18-karat gold, plain or set, made as a pair so the two sit together properly. Sized and engraved in the boutique, and re-polished for you free of charge for as long as you wear them.':
         'Платина и золото 750-й пробы, гладкие или с камнями, сделанные парой — чтобы сидеть друг с другом как должно. Размер и гравировка в бутике, полировка — бесплатно всё время, пока вы их носите.',
       'Create your own': 'Создать своё',
       'Bring a sketch, a photograph, or an heirloom you would like reset. Our atelier draws, you approve, and the piece is made in Dubai — usually within six to twelve weeks, depending on the stone.':
-        'Принесите набросок, фотографию или семейную реликвию, которую хотите переставить. Ателье рисует, вы утверждаете, изделие делают в Дубае — обычно за шесть-двенадцать недель, в зависимости от камня.',
+        'Принесите набросок, фотографию или фамильное украшение, которое хотите переоправить. Ателье создаёт эскиз, вы утверждаете, изделие изготавливается в Дубае — обычно шесть–двенадцать недель, в зависимости от камня.',
       'Begin a commission': 'Начать заказ',
 
       /* ---- Watches ---- */
@@ -151,13 +151,13 @@
       'A curated selection of the world\'s most sought-after watches — Rolex, Audemars Piguet and Patek Philippe, held in the boutique.':
         'Отобранная подборка самых желанных часов мира — Rolex, Audemars Piguet и Patek Philippe, в наличии в бутике.',
       'View the timepieces': 'Смотреть часы',
-      'Enquire': 'Запрос',
+      'Enquire': 'Узнать подробнее',
       'Selected houses': 'Избранные дома',
       'Datejust, Day-Date, Sky-Dweller and Cosmograph Daytona — in Oystersteel, yellow gold and Everose. Each watch is in the boutique and can be seen the same day, with box and papers, and sized to your wrist before you leave.':
-        'Datejust, Day-Date, Sky-Dweller и Cosmograph Daytona — в Oystersteel, жёлтом золоте и Everose. Каждые часы в бутике, их можно посмотреть в тот же день, с коробкой и документами, и подогнать по руке до того, как вы уйдёте.',
+        'Datejust, Day-Date, Sky-Dweller и Cosmograph Daytona — в Oystersteel, жёлтом золоте и Everose. Каждая модель есть в бутике — можно посмотреть в тот же день, с коробкой и документами, браслет подгоняется по запястью до вашего ухода.',
       'Audemars Piguet & Patek Philippe': 'Audemars Piguet и Patek Philippe',
       'Royal Oak in gold and rose gold, Nautilus on leather, and complications that rarely reach the open market. If the reference you want is not here, tell us — sourcing quietly is a large part of what this house does.':
-        'Royal Oak в золоте и розовом золоте, Nautilus на коже и усложнения, которые редко доходят до открытого рынка. Если нужной вам референции здесь нет — скажите: тихий поиск и есть большая часть работы этого дома.',
+        'Royal Oak в золоте и розовом золоте, Nautilus на кожаном ремне и усложнения, которые редко попадают на открытый рынок. Если нужного вам артикула здесь нет — скажите: дискретный поиск и есть значительная часть работы дома.',
 
       /* ---- The House ---- */
       'The House — Mozafarian · Since 1821': 'О доме — Mozafarian · с 1821 года',
@@ -198,16 +198,16 @@
       'For Him — Mozafarian · Fine Jewellers Since 1821': 'Для него — Mozafarian · ювелирный дом с 1821 года',
       'The Collection': 'Коллекция',
       'Fine jewellery, diamonds and rare gemstones — chosen for the women who wear them. Every piece offered on request.':
-        'Тонкие украшения, бриллианты и редкие камни — выбранные для тех, кто их носит. Каждое изделие предлагается по запросу.',
+        'Изысканные украшения, бриллианты и редкие камни — выбранные для тех, кто их носит. Каждое изделие предлагается по запросу.',
       'Gents\' rings, exceptional timepieces and diamonds with presence — for the man who knows. Every piece offered on request.':
-        'Мужские кольца, исключительные часы и бриллианты с характером — для того, кто знает. Каждое изделие предлагается по запросу.',
+        'Мужские кольца, исключительные часы и бриллианты с характером — для того, кто понимает. Каждое изделие предлагается по запросу.',
       'The Lookbook': 'Лукбук',
       'Worn, not displayed.': 'Их носят, а не выставляют.',
       'Photographed in the boutique this season. To ask about any piece you see here, write to us and we will send its details and price privately.':
         'Снято в бутике в этом сезоне. Чтобы спросить о любом изделии отсюда, напишите нам — пришлём описание и цену приватно.',
       'Photographed in the boutique this season. The timepieces below are catalogued in full — for a ring you have seen here, write to us and we will send its details privately.':
         'Снято в бутике в этом сезоне. Часы ниже описаны в каталоге полностью; о кольце, которое вы здесь увидели, напишите нам — пришлём детали приватно.',
-      'Enquire about a piece': 'Спросить об изделии',
+      'Enquire about a piece': 'Узнать об изделии',
       'Loading the collection…': 'Загружаем коллекцию…',
 
       /* ---- Jewellery hub / catalogue / product ---- */
@@ -227,7 +227,7 @@
       'You may also admire': 'Возможно, вам понравится',
       'View all →': 'Все изделия →',
       'View all pieces': 'Все изделия',
-      'Fine Jewellery': 'Тонкие украшения',
+      'Fine Jewellery': 'Ювелирные украшения',
       'Bangles': 'Жёсткие браслеты',
       'Bracelets': 'Браслеты',
       'Necklaces': 'Колье',
@@ -236,16 +236,16 @@
       'All': 'Все',
       'Discover →': 'Смотреть →',
       'Price on request': 'Цена по запросу',
-      'Photography to follow': 'Фотография готовится',
+      'Photography to follow': 'Фотографии появятся позже',
       'Maison': 'Дом',
       'Mozafarian · Since 1821': 'Mozafarian · с 1821 года',
-      'Reference': 'Референс',
+      'Reference': 'Артикул',
       'Category': 'Категория',
       'Diamonds': 'Бриллианты',
       'Total weight': 'Общий вес',
       'Certificate': 'Сертификат',
       'In the boutique': 'В бутике',
-      'Enquire on WhatsApp': 'Запрос в WhatsApp',
+      'Enquire on WhatsApp': 'Написать в WhatsApp',
       'Back to catalogue': 'Вернуться в каталог',
       'Piece not found.': 'Изделие не найдено.',
       'This piece is offered on request. Our team will share pricing, certification and availability, and can arrange a private viewing at our Dubai or London boutique.':
@@ -263,7 +263,30 @@
         '<a href="{all}">Посмотреть всю коллекцию</a> или ' +
         '<a target="_blank" rel="noopener" href="{wa}">спросить об изделии</a>.',
       'Catalogue unavailable.': 'Каталог недоступен.',
-      'Unavailable.': 'Недоступно.'
+      'Unavailable.': 'Недоступно.',
+      /* ---- image alt text (editorial & lookbook photography) ---- */
+      'Atelier': 'Ателье',
+      'Bespoke atelier': 'Ателье индивидуального заказа',
+      'Bracelet and rings': 'Браслет и кольца',
+      'Coloured gemstone rings': 'Кольца с цветными камнями',
+      'Coloured gemstones': 'Цветные драгоценные камни',
+      'Diamond drop earrings': 'Серьги-подвески с бриллиантами',
+      'Diamond earrings': 'Серьги с бриллиантами',
+      'Diamond flower earrings': 'Серьги-цветы с бриллиантами',
+      'Diamond ring': 'Кольцо с бриллиантами',
+      'Diamond riviere necklace': 'Колье-ривьера с бриллиантами',
+      'Gents jewellery': 'Мужские украшения',
+      'Gents ring': 'Мужское кольцо',
+      'Gents ring with emerald': 'Мужское кольцо с изумрудом',
+      'High jewellery': 'Высокое ювелирное искусство',
+      'Necklace': 'Колье',
+      'Pendant necklace': 'Колье с подвеской',
+      'Rare timepieces': 'Редкие часы',
+      'Timepiece': 'Часы',
+      'Timepiece and ring': 'Часы и кольцо',
+      'Timepiece on the wrist': 'Часы на запястье',
+      'Unique creations': 'Уникальные изделия',
+      'Wedding bands': 'Обручальные кольца',
     },
 
     ar: {
@@ -367,7 +390,7 @@
       /* ---- Bridal ---- */
       'Engagement & Bridal — Mozafarian · Since 1821': 'الخطوبة والزفاف — مظفريان · منذ 1821',
       'Engagement rings and wedding bands, set with diamonds chosen for a single promise.':
-        'خواتم خطوبة ودبل زفاف، مرصّعة بألماسٍ اختير من أجل وعدٍ واحد.',
+        'خواتم خطوبة وحلقات زواج، مرصّعة بألماسٍ اختير لوعدٍ واحد.',
       'Explore rings': 'استكشف الخواتم',
       'Book an appointment': 'احجز موعدًا',
       'Engagement': 'الخطوبة',
@@ -375,7 +398,7 @@
       'A solitaire, a halo, or a setting drawn for her alone. We start with the stone — you see it loose, in daylight, before anything is decided — and only then choose how it should be held.':
         'حجر منفرد، أو هالة، أو تصميم يُرسم لها وحدها. نبدأ من الحجر — تراه مفردًا في ضوء النهار قبل أي قرار — ثم نختار كيف يُحتضن.',
       'Wedding': 'الزفاف',
-      'Wedding & couples\' bands': 'دبل الزفاف والخواتم الثنائية',
+      'Wedding & couples\' bands': 'حلقات الزواج وخواتم الثنائية',
       'Platinum and 18-karat gold, plain or set, made as a pair so the two sit together properly. Sized and engraved in the boutique, and re-polished for you free of charge for as long as you wear them.':
         'بلاتين وذهب عيار 18، سادة أو مرصّع، يُصاغان معًا ليتناسبا تمامًا. نضبط المقاس والنقش في البوتيك، ونعيد التلميع مجانًا ما دمتما ترتديانهما.',
       'Create your own': 'اصنع تصميمك',
@@ -403,8 +426,8 @@
       'Heritage': 'الإرث',
       'Seven generations': 'سبعة أجيال',
       'From Neuchâtel to the Persian court, and from Tehran to Dubai and London — the trade has been handed down in this family for two centuries. What passes with it is not a technique but a standard: nothing leaves the house that the previous generation would have refused.':
-        'من نوشاتيل إلى البلاط الفارسي، ومن طهران إلى دبي ولندن — تناقلت هذه العائلة الحرفة قرنين من الزمان. وما يُتوارث ليس تقنية بل معيارًا: لا يخرج من الدار ما كان الجيل السابق ليرفضه.',
-      'Craftsmanship': 'الحرفة',
+        'من نوشاتيل إلى البلاط الفارسي، ومن طهران إلى دبي ولندن — تناقلت هذه العائلة براعة الصياغة قرنين من الزمان. وما يُتوارث ليس تقنية بل معيارًا: لا يخرج من الدار ما كان الجيل السابق ليرفضه.',
+      'Craftsmanship': 'براعة الصياغة',
       'The atelier': 'الأتيليه',
       'Drawing, setting and final polish happen under one roof, by artisans who have been with the house for decades. It is slower than sending the work out — and it is the only way we can promise that the piece in the window is the piece we made.':
         'الرسم والترصيع والتلميع النهائي يجري تحت سقف واحد، بأيدي حرفيين رافقوا الدار عقودًا. هذا أبطأ من إرسال العمل إلى الخارج — وهو الطريق الوحيد لنعدك بأن القطعة في الواجهة هي القطعة التي صنعناها.',
@@ -441,9 +464,9 @@
       'The Lookbook': 'دفتر الإطلالات',
       'Worn, not displayed.': 'تُلبس، لا تُعرض.',
       'Photographed in the boutique this season. To ask about any piece you see here, write to us and we will send its details and price privately.':
-        'صُوّرت في البوتيك هذا الموسم. للسؤال عن أي قطعة تراها هنا، راسلنا وسنرسل تفاصيلها وسعرها بشكل خاص.',
+        'صُوّرت في البوتيك هذا الموسم. للاستفسار عن أي قطعة تراها هنا، راسلنا وسنرسل تفاصيلها وسعرها بصورة خاصة.',
       'Photographed in the boutique this season. The timepieces below are catalogued in full — for a ring you have seen here, write to us and we will send its details privately.':
-        'صُوّرت في البوتيك هذا الموسم. الساعات أدناه مُدرجة في الكتالوج كاملةً — وللسؤال عن خاتم رأيته هنا، راسلنا وسنرسل تفاصيله بشكل خاص.',
+        'صُوّرت في البوتيك هذا الموسم. الساعات أدناه مُدرجة في الكتالوج كاملةً — وللاستفسار عن خاتم رأيته هنا، راسلنا وسنرسل تفاصيله بصورة خاصة.',
       'Enquire about a piece': 'استفسر عن قطعة',
       'Loading the collection…': 'جارٍ تحميل المجموعة…',
 
@@ -455,14 +478,14 @@
       'The Catalogue — Mozafarian · Fine Jewellers Since 1821': 'الكتالوج — مظفريان · دار مجوهرات منذ 1821',
       'The Catalogue': 'الكتالوج',
       'Seven generations of craftsmanship — rings, rare gemstones, bespoke gold and timepieces. Every piece is offered on request; our team shares pricing, certification and availability privately.':
-        'سبعة أجيال من الحرفة — خواتم وأحجار نادرة وذهب حسب الطلب وساعات. كل قطعة تُعرض عند الطلب؛ ويشارك فريقنا السعر والشهادة والتوفّر بشكل خاص.',
+        'سبعة أجيال من براعة الصياغة — خواتم وأحجار كريمة نادرة وذهب حسب الطلب وساعات. كل قطعة تُعرض عند الطلب؛ ويُطلع فريقنا على السعر والشهادة والتوفّر بصورة خاصة.',
       'Loading the catalogue…': 'جارٍ تحميل الكتالوج…',
       'Piece — Mozafarian · Fine Jewellers Since 1821': 'قطعة — مظفريان · دار مجوهرات منذ 1821',
       'Catalogue': 'الكتالوج',
       'Piece': 'قطعة',
       'Loading…': 'جارٍ التحميل…',
       'You may also admire': 'قد يعجبك أيضًا',
-      'View all →': 'عرض الكل →',
+      'View all →': 'عرض الكل ←',
       'View all pieces': 'كل القطع',
       'Fine Jewellery': 'المجوهرات الراقية',
       'Bangles': 'الأساور الصلبة',
@@ -471,7 +494,7 @@
       'Charms': 'التعليقات',
       'Sets': 'الأطقم',
       'All': 'الكل',
-      'Discover →': 'اكتشف →',
+      'Discover →': 'اكتشف ←',
       'Price on request': 'السعر عند الطلب',
       'Photography to follow': 'الصورة قريبًا',
       'Maison': 'الدار',
@@ -500,7 +523,30 @@
         '<a href="{all}">تصفّح المجموعة كاملة</a> أو ' +
         '<a target="_blank" rel="noopener" href="{wa}">استفسر عن قطعة</a>.',
       'Catalogue unavailable.': 'الكتالوج غير متاح.',
-      'Unavailable.': 'غير متاح.'
+      'Unavailable.': 'غير متاح.',
+      /* ---- image alt text (editorial & lookbook photography) ---- */
+      'Atelier': 'المشغل',
+      'Bespoke atelier': 'مشغل التصميم الخاص',
+      'Bracelet and rings': 'سوار وخواتم',
+      'Coloured gemstone rings': 'خواتم بأحجار كريمة ملوّنة',
+      'Coloured gemstones': 'أحجار كريمة ملوّنة',
+      'Diamond drop earrings': 'أقراط متدلّية بالألماس',
+      'Diamond earrings': 'أقراط ألماس',
+      'Diamond flower earrings': 'أقراط زهرية بالألماس',
+      'Diamond ring': 'خاتم ألماس',
+      'Diamond riviere necklace': 'عقد ريفيير بالألماس',
+      'Gents jewellery': 'مجوهرات رجالية',
+      'Gents ring': 'خاتم رجالي',
+      'Gents ring with emerald': 'خاتم رجالي بالزمرّد',
+      'High jewellery': 'المجوهرات الراقية',
+      'Necklace': 'عقد',
+      'Pendant necklace': 'عقد بقلادة',
+      'Rare timepieces': 'ساعات نادرة',
+      'Timepiece': 'ساعة',
+      'Timepiece and ring': 'ساعة وخاتم',
+      'Timepiece on the wrist': 'ساعة على المعصم',
+      'Unique creations': 'إبداعات فريدة',
+      'Wedding bands': 'حلقات الزواج',
     }
   };
 
@@ -522,9 +568,8 @@
       'boutiques.title': 'Приходите и <em>смотрите.</em>',
       'forher.title': 'Для <em>неё.</em>',
       'forhim.title': 'Для <em>него.</em>',
-      'shop.title': 'Тонкие украшения,<br><em>домом</em> и руками.',
-      'jewellery.title': 'Смотреть по <em>категориям</em>.'
-    },
+      'shop.title': 'Ювелирные украшения —<br><em>домом</em>, вручную.',
+      'jewellery.title': 'Смотреть по <em>категориям</em>.'    },
     ar: {
       'hero.title': '<span class="line"><span>سبعة أجيال</span></span><span class="line"><span>من صناعة <em>المجوهرات.</em></span></span>',
       'featured.title': '<span class="line"><span>خاتم آرت ديكو</span></span><span class="line"><span>بالألماس والياقوت الأزرق</span></span>',
@@ -642,7 +687,9 @@
 
   // Piece names live in their own dictionary (js/i18n-titles.js): the catalogue
   // is the client's data, not site copy, and most of it stays in English.
-  var TITLE_SCOPE = '.card__title, .pdp__title, .card__img, #pdpMain';
+  // '.crumb span' holds the piece name on the product page — without it the
+  // breadcrumb kept showing the English title next to a translated heading.
+  var TITLE_SCOPE = '.card__title, .pdp__title, .card__img, #pdpMain, .crumb span';
 
   function titleOf(src) {
     if (!window.MOZ_TITLES) return null;
