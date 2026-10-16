@@ -960,10 +960,9 @@
  },
  {
   "handle": "rolex-cosmograph-daytona-18ct-white-gold-019",
-  "title": "Rolex Cosmograph Daytona — 18ct White Gold · Panda Dial · Oysterflex Strap",
+  "title": "Rolex Cosmograph Daytona — 18ct Everose Gold · Panda Dial · Cerachrom Bezel · Oysterflex Strap",
   "category": "Watches",
   "images": [
-   "./assets/products/wx-daytona-019.jpg",
    "./assets/products/moz-019.jpg",
    "./assets/products/moz-045.jpg",
    "./assets/products/moz-087.jpg"
@@ -991,7 +990,6 @@
   "title": "Audemars Piguet Royal Oak Chronograph — 18ct Rose Gold · Blue Dial · Rubber Strap",
   "category": "Watches",
   "images": [
-   "./assets/products/wx-ro-chrono-006.jpg",
    "./assets/products/moz-006.jpg",
    "./assets/products/moz-024.jpg",
    "./assets/products/moz-039.jpg"
@@ -1016,10 +1014,9 @@
  },
  {
   "handle": "patek-philippe-nautilus-18ct-rose-gold-043",
-  "title": "Patek Philippe Nautilus — 18ct Rose Gold · Brown Dial · Leather Strap",
+  "title": "Patek Philippe Nautilus Chronograph — 18ct Rose Gold · Brown Dial · Leather Strap",
   "category": "Watches",
   "images": [
-   "./assets/products/wx-nautilus-043.jpg",
    "./assets/products/moz-043.jpg",
    "./assets/products/moz-063.jpg",
    "./assets/products/moz-079.jpg",

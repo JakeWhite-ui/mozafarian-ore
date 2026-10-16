@@ -36,7 +36,7 @@
   /* ---------- data ---------- */
   // Versioned like css/js: without it the browser keeps serving a stale
   // catalogue, so price and photo updates never reach the visitor.
-  var DATA_V = 15;
+  var DATA_V = 16;
 
   // Photos get re-cropped in place under the same filenames, so the path alone
   // cannot bust the cache — version the image URLs off DATA_V as well.
